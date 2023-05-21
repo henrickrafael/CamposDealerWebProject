@@ -4,6 +4,7 @@ using CamposDealerWebProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CamposDealerWebProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230521200036_CorrecaoCampos")]
+    partial class CorrecaoCampos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,13 +77,13 @@ namespace CamposDealerWebProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdVenda"));
 
-                    b.Property<int>("ClienteId")
+                    b.Property<int?>("ClienteIdCliente")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DthVenda")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProdutoId")
+                    b.Property<int?>("ProdutoIdProduto")
                         .HasColumnType("int");
 
                     b.Property<int>("QtdVenda")
@@ -94,9 +97,9 @@ namespace CamposDealerWebProject.Migrations
 
                     b.HasKey("IdVenda");
 
-                    b.HasIndex("ClienteId");
+                    b.HasIndex("ClienteIdCliente");
 
-                    b.HasIndex("ProdutoId");
+                    b.HasIndex("ProdutoIdProduto");
 
                     b.ToTable("Vendas");
                 });
@@ -105,15 +108,11 @@ namespace CamposDealerWebProject.Migrations
                 {
                     b.HasOne("CamposDealerWebProject.Models.Cliente", "Cliente")
                         .WithMany("Vendas")
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClienteIdCliente");
 
                     b.HasOne("CamposDealerWebProject.Models.Produto", "Produto")
                         .WithMany("Vendas")
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProdutoIdProduto");
 
                     b.Navigation("Cliente");
 

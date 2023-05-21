@@ -14,17 +14,17 @@ namespace CamposDealerWebProject.Repositories
             => _context = context;
 
         public IEnumerable<Venda> Vendas => _context.Vendas
-            .Include(venda => venda.Cliente.NmCliente)
-            .Include(venda => venda.Produto.DscProduto);
+            .Include(venda => venda.Cliente)
+            .Include(venda => venda.Produto);
 
         public Venda GetVendaByClienteName(string nmCliente) => _context.Vendas
-            .Include(venda => venda.Cliente.NmCliente)
-            .Include(venda => venda.Produto.DscProduto)
+            .Include(venda => venda.Cliente)
+            .Include(venda => venda.Produto)
             .FirstOrDefault(venda => venda.Cliente.NmCliente.Equals(nmCliente));
 
         public Venda GetVendaByDscProduto(string dscProduto) => _context.Vendas
-            .Include(venda => venda.Cliente.NmCliente)
-            .Include(venda => venda.Produto.DscProduto)
+            .Include(venda => venda.Cliente)
+            .Include(venda => venda.Produto)
             .FirstOrDefault(venda => venda.Produto.DscProduto.Equals(dscProduto));
 
     }

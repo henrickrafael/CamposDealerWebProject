@@ -24,12 +24,10 @@ namespace CamposDealerWebProject.Models
         [Column(TypeName = "decimal(10,2)")]
         public float VlrTotalVenda { get; set; }
 
-        public int IdCliente { get; set; }
-
+        public int ClienteId { get; set; }
         public virtual Cliente Cliente { get; set; }
 
-        public int IdProduto { get; set; }
-
+        public int ProdutoId { get; set; }
         public virtual Produto Produto { get; set; }
     }
 }
