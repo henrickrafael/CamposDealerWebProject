@@ -1,4 +1,6 @@
-﻿@{
+﻿@model RepositoryViewModel
+
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -13,9 +15,57 @@
 
     <!--Separar as views posteriormente em arquivos individuais-->
     <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">...</div>
-        <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">...</div>
-        <div class="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-sales-tab">...</div>
+        <div class="tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">           
+            <div class="container mt-3 p-2">
+                <table class="table table-hover table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>                            
+                            <th scope="col">Nome</th>
+                            <th scope="col">Cidade</th>
+                            <th scope="col">Ações</th>                            
+                        </tr>
+                    </thead>
+                    @foreach (var cliente in Model.Clientes)
+                    {
+                        <tr>                            
+                            <td>@cliente.NmCliente</td>
+                            <td>@cliente.Cidade</td>
+                            <td><span><a href="#">Editar</a> | </span><a href="#">Remover</a></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
+            <div class="container mt-3 p-2">
+                <table class="table table-hover table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Valor Unitário</th>
+                            <th scope="col">Ações</th>                            
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-sales-tab">
+            <div class="container mt-3 p-2">
+                <table class="table table-hover table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>                            
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col">DataHora Venda</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Produto</th>
+                            <th scope="col">Ações</th>                            
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
