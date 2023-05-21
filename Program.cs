@@ -1,10 +1,15 @@
 using CamposDealerWebProject.Context;
+using CamposDealerWebProject.Repositories;
+using CamposDealerWebProject.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddTransient<IClienteRepository, ClienteRepository>();
+builder.Services.AddTransient<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddTransient<IVendaRepository, VendaRepository>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
