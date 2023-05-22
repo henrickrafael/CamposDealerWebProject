@@ -13,8 +13,5 @@ namespace CamposDealerWebProject.Repositories
 
 
         public IEnumerable<Cliente> Clientes => _context.Clientes;
-
-        public Cliente GetClienteByName(string nmCliente)
-            => _context.Clientes.FirstOrDefault(cliente => cliente.NmCliente.Equals(nmCliente));
     }
 }

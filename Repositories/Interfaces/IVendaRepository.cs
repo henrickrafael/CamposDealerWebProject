@@ -1,4 +1,5 @@
 ﻿using CamposDealerWebProject.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CamposDealerWebProject.Repositories.Interfaces
 {
@@ -7,7 +8,7 @@ namespace CamposDealerWebProject.Repositories.Interfaces
         IEnumerable<Venda> Vendas { get; }
 
         Venda GetVendaByClienteName(string nmCliente);
-
+        
         Venda GetVendaByDscProduto(string dscProduto);
     }
 }
