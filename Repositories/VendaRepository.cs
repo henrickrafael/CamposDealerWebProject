@@ -17,15 +17,5 @@ namespace CamposDealerWebProject.Repositories
             .Include(venda => venda.Cliente)
             .Include(venda => venda.Produto);
 
-        public Venda GetVendaByClienteName(string nmCliente) => _context.Vendas
-            .Include(venda => venda.Cliente)
-            .Include(venda => venda.Produto)
-            .FirstOrDefault(venda => venda.Cliente.NmCliente.Equals(nmCliente));
-
-        public Venda GetVendaByDscProduto(string dscProduto) => _context.Vendas
-            .Include(venda => venda.Cliente)
-            .Include(venda => venda.Produto)
-            .FirstOrDefault(venda => venda.Produto.DscProduto.Equals(dscProduto));
-
     }
 }
