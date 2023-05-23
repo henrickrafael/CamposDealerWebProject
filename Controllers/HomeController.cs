@@ -21,82 +21,31 @@ namespace CamposDealerWebProject.Controllers
 
         public IActionResult Index()
         {
-            var repositoryViewModel = new RepositoryViewModel
-            {
-                Clientes = _clienteRepository.Clientes,
-                Produtos = _produtoRepository.Produtos,
-                Vendas = _vendaRepository.Vendas
-            };
-
-            return View(repositoryViewModel);
+            return View(new RepositoryViewModel(_clienteRepository.Clientes, _produtoRepository.Produtos, _vendaRepository.Vendas));
         }
 
         public ViewResult SearchClient(string nmCliente)
-        {
-            IEnumerable<Cliente> clientes;
-
-            if (string.IsNullOrWhiteSpace(nmCliente))
-                clientes = _clienteRepository.Clientes.OrderBy(c => c.IdCliente);
-            else
-                clientes = _clienteRepository.Clientes.Where(c => c.NmCliente.ToLower().Equals(nmCliente.ToLower()));
-
-            return View("~/Views/Home/Index.cshtml", new RepositoryViewModel
-            { 
-                Clientes = clientes,
-                Produtos = _produtoRepository.Produtos,
-                Vendas = _vendaRepository.Vendas
-            });
+        {           
+            return View("~/Views/Home/Index.cshtml", new RepositoryViewModel(_clienteRepository.GetClienteByNome(nmCliente), 
+                                                    _produtoRepository.Produtos, _vendaRepository.Vendas));
         }
 
         public ViewResult SearchProduct(string dscProduto)
         {
-            IEnumerable<Produto> produtos;
-
-            if (string.IsNullOrWhiteSpace(dscProduto))
-                produtos = _produtoRepository.Produtos.OrderBy(p => p.IdProduto);
-            else
-                produtos = _produtoRepository.Produtos.Where(p => p.DscProduto.ToLower().Equals(dscProduto.ToLower()));
-
-            return View("~/Views/Home/Index.cshtml", new RepositoryViewModel
-            {
-                Clientes = _clienteRepository.Clientes,
-                Produtos = produtos,
-                Vendas = _vendaRepository.Vendas
-            });
+            return View("~/Views/Home/Index.cshtml", 
+            new RepositoryViewModel(_clienteRepository.Clientes, _produtoRepository.GetProdutoByDescription(dscProduto), _vendaRepository.Vendas));
         }
 
         public ViewResult SearchSaleClient(string nmClient)
-        {
-            IEnumerable<Venda> vendas;
-
-            if (string.IsNullOrWhiteSpace(nmClient))
-                vendas = _vendaRepository.Vendas.OrderBy(v => v.IdVenda);
-            else
-                vendas = _vendaRepository.Vendas.Where(v => v.Cliente.NmCliente.ToLower().Equals(nmClient.ToLower()));
-
-            return View("~/Views/Home/Index.cshtml", new RepositoryViewModel
-            {
-                Clientes = _clienteRepository.Clientes,
-                Produtos = _produtoRepository.Produtos,
-                Vendas = vendas
-            });
+        {            
+            return View("~/Views/Home/Index.cshtml", 
+            new RepositoryViewModel(_clienteRepository.Clientes, _produtoRepository.Produtos, _vendaRepository.GetVendaByNomeCliente(nmClient)));
         }
 
         public ViewResult SearchSaleProduct(string dscProduct)
-        {
-            IEnumerable<Venda> vendas;
-
-            if (string.IsNullOrWhiteSpace(dscProduct))
-                vendas = _vendaRepository.Vendas.OrderBy(v => v.IdVenda);
-            else
-                vendas = _vendaRepository.Vendas.Where(v => v.Produto.DscProduto.ToLower().Equals(dscProduct.ToLower()));
-
-            return View("~/Views/Home/Index.cshtml", new RepositoryViewModel
-            {
-                Clientes = _clienteRepository.Clientes,
-                Produtos = _produtoRepository.Produtos,
-                Vendas = vendas
-            });
+        {           
+            return View("~/Views/Home/Index.cshtml", 
+            new RepositoryViewModel(_clienteRepository.Clientes, _produtoRepository.Produtos, _vendaRepository.GetVendaByDscProduto(dscProduct)));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

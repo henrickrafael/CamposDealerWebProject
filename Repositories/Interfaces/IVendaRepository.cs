@@ -6,5 +6,9 @@ namespace CamposDealerWebProject.Repositories.Interfaces
     public interface IVendaRepository
     {
         IEnumerable<Venda> Vendas { get; }
+
+        public IEnumerable<Venda> GetVendaByNomeCliente(string nmCliente);
+
+        public IEnumerable<Venda> GetVendaByDscProduto(string dscProduto);
     }
 }

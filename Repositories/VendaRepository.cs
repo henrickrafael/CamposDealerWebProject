@@ -17,5 +17,20 @@ namespace CamposDealerWebProject.Repositories
             .Include(venda => venda.Cliente)
             .Include(venda => venda.Produto);
 
+        public IEnumerable<Venda> GetVendaByDscProduto(string dscProduto)
+        {
+            if (!string.IsNullOrWhiteSpace(dscProduto))
+                return _context.Vendas.Include(venda => venda.Cliente).Include(venda => venda.Produto).Where(venda => venda.Produto.DscProduto.ToLower().Equals(dscProduto.ToLower()));
+
+            return _context.Vendas.Include(venda => venda.Cliente).Include(venda => venda.Produto).OrderBy(venda => venda.IdVenda);
+        }
+
+        public IEnumerable<Venda> GetVendaByNomeCliente(string nmCliente)
+        {
+            if (!string.IsNullOrWhiteSpace(nmCliente))
+                return _context.Vendas.Include(venda => venda.Cliente).Include(venda => venda.Produto).Where(venda => venda.Cliente.NmCliente.ToLower().Equals(nmCliente.ToLower()));
+
+            return _context.Vendas.Include(venda => venda.Cliente).Include(venda => venda.Produto).OrderBy(venda => venda.IdVenda);
+        }
     }
 }
