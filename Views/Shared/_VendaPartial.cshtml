@@ -1,0 +1,20 @@
+﻿@model Venda
+
+<tr>
+    <td>@Model.QtdVenda</td>
+    <td>@Model.VlrUnitarioVenda.ToString("c")</td>
+    <td>@Model.DthVenda.ToString("g")</td>
+    <td>@Model.VlrTotalVenda.ToString("c")</td>
+    <td>@Model.Cliente.NmCliente</td>
+    <td>@Model.Produto.DscProduto</td>
+    <td>
+        <span>
+            <button class="btn btn-warning" type="button" href="#">
+                <img src="~/images/pencil_icon.png" height="20px">
+            </button> |
+        </span>
+        <button class="btn btn-danger" href="#" onclick="confirmDelete(false, false)">
+            <img src="~/images/delete_ic_icon.png" height="20px">
+        </button>
+    </td>
+</tr>

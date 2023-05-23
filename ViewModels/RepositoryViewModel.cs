@@ -18,5 +18,7 @@ namespace CamposDealerWebProject.ViewModels
         public IEnumerable<Produto> Produtos { get; set; }
         
         public IEnumerable<Venda> Vendas { get; set; }
+
+        public Cliente cliente;
     }
 }

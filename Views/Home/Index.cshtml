@@ -14,8 +14,7 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">                
-            <div class="container mt-3 p-2">
-                
+            <div class="container mt-3 p-2">                
                 <button type="button" class="btn btn-success mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#crudModalClient">
                     Inserir cliente
                 </button>
@@ -41,24 +40,17 @@
                     </thead>
                     @foreach (var cliente in Model.Clientes)
                     {
-                        <tr>                            
-                            <td>@cliente.NmCliente</td>
-                            <td>@cliente.Cidade</td>
-                            <td><span>
-                            <button class="btn btn-warning" type="button" href="#">
-                                        <img src="~/images/pencil_icon.png" height="20px">
-                            </button> | </span>
-                                <button class="btn btn-danger" onclick="confirmDelete(true, false)">
-                                <img src="~/images/delete_ic_icon.png" height="20px">
-                            </button>
-                            </td>
-                        </tr>
+                      <partial name="_ClientePartial" for="@cliente" />
                     }
                 </table>
             </div><!--container-->
         </div><!--nav-client-->
-        <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
+        <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">          
             <div class="container mt-3 p-2">
+                <button type="button" class="btn btn-success mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#crudModalProduto">
+                    Inserir produto
+                </button>
+
                 @using (Html.BeginForm("SearchProduct", "Home", FormMethod.Post))
                 {
                     <div class="input-group mb-3">
@@ -80,20 +72,7 @@
                     </thead>
                      @foreach (var produto in Model.Produtos)
                     {
-                        <tr>                            
-                            <td>@produto.DscProduto</td>
-                            <td>@produto.VlrUnitario.ToString("c")</td>
-                            <td>
-                                <span>
-                                    <button class="btn btn-warning" type="button" href="#">
-                                        <img src="~/images/pencil_icon.png" height="20px">
-                                    </button> |
-                                </span>
-                                <button class="btn btn-danger" href="#" onclick="confirmDelete(false, true)">
-                                    <img src="~/images/delete_ic_icon.png" height="20px">
-                                </button>
-                            </td>
-                        </tr>
+                        <partial name="_ProdutoPartial" for="@produto" />
                     }
                 </table>
             </div><!--container-->
@@ -133,24 +112,7 @@
                     </thead>
                     @foreach (var venda in Model.Vendas)
                     {
-                        <tr>
-                            <td>@venda.QtdVenda</td>
-                            <td>@venda.VlrUnitarioVenda.ToString("c")</td>
-                            <td>@venda.DthVenda.ToString("g")</td>
-                            <td>@venda.VlrTotalVenda.ToString("c")</td>
-                            <td>@venda.Cliente.NmCliente</td>
-                            <td>@venda.Produto.DscProduto</td>
-                            <td>
-                                <span>
-                                    <button class="btn btn-warning" type="button" href="#">
-                                        <img src="~/images/pencil_icon.png" height="20px">
-                                    </button> |
-                                </span>
-                                <button class="btn btn-danger" href="#" onclick="confirmDelete(false, false)">
-                                    <img src="~/images/delete_ic_icon.png" height="20px">
-                                </button>
-                            </td>
-                        </tr>
+                        <partial name="_VendaPartial" for="@venda" />
                     }
                 </table>
             </div>
@@ -159,30 +121,6 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="crudModalClient" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="crudModalClientlLabel">Inserir cliente</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <input type="text" class="form-control d-none clienteId">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Nome</span>
-                    <input type="text" class="form-control clienteNome">                               
-                </div>                
-                <p class="text-danger erroNomeCliente d-none"></p>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Cidade</span>
-                    <input type="text" class="form-control cidadeNome">                    
-                </div>                
-                <p class="text-danger erroCidadeCliente d-none"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="fecharModal" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" id="inserirCliente" class="btn btn-primary">Inserir</button>
-            </div>
-        </div>
-    </div>
-</div>
+<partial name="~/Views/Shared/Modals/_ClienteModalPartial.cshtml"/>
+<partial name="~/Views/Shared/Modals/_ProdutoModalPartial.cshtml"/>
+@*<partial name="~/Views/Shared/Modals/_VendaModalPartial" for="@Model.Vendas" />*@

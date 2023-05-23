@@ -1,0 +1,27 @@
+﻿<div class="modal fade" id="crudModalProduto" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crudModalProdutoLabel">Inserir Produto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control d-none inputIdCliente">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default inputText1">Descrição</span>
+                    <input type="text" class="form-control inputTextDesc">
+                </div>
+                <p class="text-danger erroInput1 d-none"></p>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default inputText2">Valor</span>
+                    <input type="text" class="form-control inputTextVlr">
+                </div>
+                <p class="text-danger erroInput2 d-none"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="fecharModalProduto" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" id="inserirProduto" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
