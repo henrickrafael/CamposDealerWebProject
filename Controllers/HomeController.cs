@@ -48,6 +48,44 @@ namespace CamposDealerWebProject.Controllers
             new RepositoryViewModel(_clienteRepository.Clientes, _produtoRepository.Produtos, _vendaRepository.GetVendaByDscProduto(dscProduct)));
         }
 
+        [HttpPost]
+        public async Task AddCliente(Cliente cliente) 
+        { 
+            if(ModelState.IsValid) {
+                await _clienteRepository.AddCliente(cliente);                
+            }            
+        }
+
+        [HttpPost]
+        public async Task DeleteCliente(int idCliente) 
+        {
+            if (ModelState.IsValid)
+            {
+                await _clienteRepository.DeleteCliente(idCliente);
+            }
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetClienteById(int idCliente) 
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _clienteRepository.GetClienteById(idCliente);
+                return Json(result);
+            }
+
+            return Json(ModelState);
+        }
+
+        [HttpPost]
+        public async Task UpdateCliente(int idCliente) 
+        {
+            if (ModelState.IsValid)
+            {
+                await _clienteRepository.UpdateCliete(idCliente);
+            }
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

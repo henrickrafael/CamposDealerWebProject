@@ -1,6 +1,7 @@
 ﻿using CamposDealerWebProject.Context;
 using CamposDealerWebProject.Models;
 using CamposDealerWebProject.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CamposDealerWebProject.Repositories
 {
@@ -12,6 +13,28 @@ namespace CamposDealerWebProject.Repositories
            => _context = context;
 
         public IEnumerable<Cliente> Clientes => _context.Clientes;
+        
+        public async Task AddCliente(Cliente cliente)
+        {
+            await _context.Clientes.AddAsync(cliente);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteCliente(int idCliente)
+        {
+            var cliente = await _context.Clientes.FindAsync(idCliente);
+
+            if (cliente != null) {
+                _context.Clientes.Remove(cliente);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<Cliente> GetClienteById(int idCliente)
+        {
+            var cliente = await _context.Clientes.FindAsync(idCliente);            
+            return cliente;
+        }
 
         public IEnumerable<Cliente> GetClienteByNome(string nmCliente)
         {
@@ -20,6 +43,15 @@ namespace CamposDealerWebProject.Repositories
 
             return _context.Clientes.OrderBy(cliente => cliente.IdCliente);
         }
-            
+
+        public async Task UpdateCliete(int idCliente)
+        {
+            var cliente = await _context.Clientes.FindAsync(idCliente);
+
+            if (cliente != null) {
+                _context.Clientes.Update(cliente);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
