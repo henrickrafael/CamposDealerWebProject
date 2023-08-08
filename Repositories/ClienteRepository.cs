@@ -14,13 +14,13 @@ namespace CamposDealerWebProject.Repositories
 
         public IEnumerable<Cliente> Clientes => _context.Clientes;
         
-        public async Task AddCliente(Cliente cliente)
+        public async Task AddClient(Cliente cliente)
         {
             await _context.Clientes.AddAsync(cliente);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteCliente(int idCliente)
+        public async Task DeleteClientById(int idCliente)
         {
             var cliente = await _context.Clientes.FindAsync(idCliente);
 
@@ -30,21 +30,21 @@ namespace CamposDealerWebProject.Repositories
             }
         }
 
-        public async Task<Cliente> GetClienteById(int idCliente)
+        public async Task<Cliente> GetClientById(int idCliente)
         {
             var cliente = await _context.Clientes.FindAsync(idCliente);            
             return cliente;
         }
 
-        public IEnumerable<Cliente> GetClienteByNome(string nmCliente)
+        public IEnumerable<Cliente> GetClientByName(string nmCliente)
         {
             if(!string.IsNullOrWhiteSpace(nmCliente))
-               return _context.Clientes.Where(cliente => cliente.NmCliente.ToLower().Equals(nmCliente.ToLower()));
+               return _context.Clientes.Where(cliente => cliente.NmCliente.Equals(nmCliente, StringComparison.InvariantCultureIgnoreCase));
 
             return _context.Clientes.OrderBy(cliente => cliente.IdCliente);
         }
 
-        public async Task UpdateCliete(int idCliente)
+        public async Task UpdateClientById(int idCliente)
         {
             var cliente = await _context.Clientes.FindAsync(idCliente);
 

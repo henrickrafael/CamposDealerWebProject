@@ -13,7 +13,7 @@ namespace CamposDealerWebProject.Repositories
 
         public IEnumerable<Produto> Produtos => _context.Produtos;
 
-        public IEnumerable<Produto> GetProdutoByDescription(string dscProduto)
+        public IEnumerable<Produto> GetProductByDescription(string dscProduto)
             => _context.Produtos.Where(produto => produto.DscProduto.ToLower().Equals(dscProduto.ToLower()));
     }
 }

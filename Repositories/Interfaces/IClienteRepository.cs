@@ -7,15 +7,15 @@ namespace CamposDealerWebProject.Repositories.Interfaces
     {
         IEnumerable<Cliente> Clientes { get; }
 
-        public IEnumerable<Cliente> GetClienteByNome(string nmCliente);
+        public IEnumerable<Cliente> GetClientByName(string nmCliente);
 
-        public Task AddCliente(Cliente cliente);
+        public Task AddClient(Cliente cliente);
 
-        public Task DeleteCliente(int idCliente);
+        public Task DeleteClientById(int idCliente);
 
-        public Task UpdateCliete(int idCliente);
+        public Task UpdateClientById(int idCliente);
 
-        public Task<Cliente> GetClienteById(int idCliente);
+        public Task<Cliente> GetClientById(int idCliente);
     }
 
 }
