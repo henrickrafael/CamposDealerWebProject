@@ -12,11 +12,11 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">                
-            <div class="container mt-3 p-2">                
+            @*<div class="container mt-3 p-2">                
                 <button type="button" class="btn btn-success mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#crudModalClient">
                     Inserir cliente
                 </button>
-            </div>
+            </div>*@
             <div class="container mt-3 p-2">
                 <table class="table table-hover table-bordered table-striped">
                     <thead class="table-dark">
@@ -26,7 +26,8 @@
                             <th scope="col">Ações</th>                            
                         </tr>
                     </thead>
-                </table>
+                    <tbody id="client-content-list"></tbody>
+                </table>                
             </div><!--container-->
         </div><!--nav-client-->
         <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">          
@@ -72,3 +73,10 @@
     </div><!--nav-tabContent-->
 </div>
 
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#client-content-list").load("/Home/ClientesModalPartial");
+        });
+    </script>
+}                            

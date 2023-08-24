@@ -17,7 +17,7 @@ namespace CamposDealerWebProject.Models
         [StringLength(200, ErrorMessage = "Limite de 200 caracteres atingido!")]
         public string Cidade { get; set; }
 
-        public List<Venda> Vendas { get; set; }
+        public virtual List<Venda> Vendas { get; set; }
         
     }
 }

@@ -16,3 +16,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.icon-prop {
+    width: 1.7em;
+    height: 1.7em;
+}

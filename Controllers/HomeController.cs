@@ -19,10 +19,14 @@ namespace CamposDealerWebProject.Controllers
         }
 
         public IActionResult Index()
-        {
-            //return View(new RepositoryViewModel(_clienteRepository.Clientes, _produtoRepository.Produtos, _vendaRepository.Vendas));
+        {            
             return View();
-        }        
+        }
+
+        public async Task<IActionResult> ClientesModalPartialAsync()
+        {
+            return PartialView("../Clientes/_ClientesModal", await _clienteRepository.GetAllClients());
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

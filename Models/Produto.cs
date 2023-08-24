@@ -19,6 +19,6 @@ namespace CamposDealerWebProject.Models
         [Column(TypeName = "decimal(5,2)")]
         public float VlrUnitario { get; set; }
 
-        public List<Venda> Vendas  { get; set; }
+        public virtual List<Venda> Vendas  { get; set; }
     }
 }

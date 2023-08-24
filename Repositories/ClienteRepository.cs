@@ -2,6 +2,7 @@
 using CamposDealerWebProject.Models;
 using CamposDealerWebProject.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CamposDealerWebProject.Repositories
 {
@@ -28,6 +29,12 @@ namespace CamposDealerWebProject.Repositories
                 _context.Clientes.Remove(cliente);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<Cliente>> GetAllClients()
+        {
+            var cliente = await _context.Clientes.ToListAsync();
+            return cliente;
         }
 
         public async Task<Cliente> GetClientById(int idCliente)
