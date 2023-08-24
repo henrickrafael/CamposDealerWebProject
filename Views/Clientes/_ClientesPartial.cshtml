@@ -1,0 +1,14 @@
+﻿@model List<Cliente>
+
+
+@foreach (Cliente cliente in Model)
+{   
+    <tr>       
+        <td>@cliente.NmCliente</td>
+        <td>@cliente.Cidade</td>
+        <td>
+            <button type="button" class="btn btn-warning btn-sm" href="@cliente.IdCliente"><img class="icon-prop" src="~/images/pencil_icon.png" /></button> |
+            <button type="button" class="btn btn-danger btn-sm" href="@cliente.IdCliente"><img class="icon-prop" src="~/images/delete_ic_icon.png" /></button>
+        </td>
+    </tr>
+}    

@@ -1,0 +1,14 @@
+﻿@model List<Produto>
+
+
+@foreach (Produto produto in Model)
+{
+    <tr>
+        <td>@produto.DscProduto</td>
+        <td>@produto.VlrUnitario.ToString("c")</td>
+        <td>
+            <button type="button" class="btn btn-warning btn-sm" href="@produto.IdProduto"><img class="icon-prop" src="~/images/pencil_icon.png" /></button> |
+            <button type="button" class="btn btn-danger btn-sm" href="@produto.IdProduto"><img class="icon-prop" src="~/images/delete_ic_icon.png" /></button>
+        </td>
+    </tr>
+}    

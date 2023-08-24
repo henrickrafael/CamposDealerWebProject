@@ -33,8 +33,7 @@ namespace CamposDealerWebProject.Repositories
 
         public async Task<List<Cliente>> GetAllClients()
         {
-            var cliente = await _context.Clientes.ToListAsync();
-            return cliente;
+            return await _context.Clientes.ToListAsync();
         }
 
         public async Task<Cliente> GetClientById(int idCliente)

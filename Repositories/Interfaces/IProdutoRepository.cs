@@ -6,6 +6,8 @@ namespace CamposDealerWebProject.Repositories.Interfaces
     {
         IEnumerable<Produto> Produtos { get; }
 
-        IEnumerable<Produto> GetProductByDescription(string dscProduto);        
+        IEnumerable<Produto> GetProductByDescription(string dscProduto);
+
+        public Task<List<Produto>> GetAllProducts();
     }
 }

@@ -23,9 +23,14 @@ namespace CamposDealerWebProject.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ClientesModalPartialAsync()
+        public async Task<IActionResult> ClientesPartialAsync()
         {
-            return PartialView("../Clientes/_ClientesModal", await _clienteRepository.GetAllClients());
+            return PartialView("../Clientes/_ClientesPartial", await _clienteRepository.GetAllClients());
+        }
+
+        public async Task<IActionResult> ProdutosPartialAsync() 
+        {
+            return PartialView("../Produtos/_ProdutosPartial", await _produtoRepository.GetAllProducts());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
