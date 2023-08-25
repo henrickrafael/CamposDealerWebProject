@@ -25,6 +25,13 @@ namespace CamposDealerWebProject.Repositories
             return _context.Vendas.Include(venda => venda.Cliente).Include(venda => venda.Produto).OrderBy(venda => venda.IdVenda);
         }
 
+        public async Task<List<Venda>> GetAllVendas() 
+        {
+            return await _context.Vendas
+                .Include(venda => venda.Cliente)
+                .Include(venda => venda.Produto).ToListAsync();
+        }
+
         public IEnumerable<Venda> GetVendaByNomeCliente(string nmCliente)
         {
             if (!string.IsNullOrWhiteSpace(nmCliente))

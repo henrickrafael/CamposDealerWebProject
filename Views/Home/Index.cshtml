@@ -68,6 +68,7 @@
                             <th scope="col">Ações</th>                            
                         </tr>
                     </thead>                  
+                    <tbody id="sales-content-list"></tbody>
                 </table>
             </div>
         </div><!--nav-sales-->
@@ -79,6 +80,7 @@
         $(document).ready(function () {
             $("#client-content-list").load("/Home/ClientesPartial");
             $("#product-content-list").load("/Home/ProdutosPartial");
+            $("#sales-content-list").load("/Home/VendasPartial");
         });
     </script>
 }                            

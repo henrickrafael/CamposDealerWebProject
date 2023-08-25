@@ -33,6 +33,11 @@ namespace CamposDealerWebProject.Controllers
             return PartialView("../Produtos/_ProdutosPartial", await _produtoRepository.GetAllProducts());
         }
 
+        public async Task<IActionResult> VendasPartialAsync()
+        {
+            return PartialView("../Vendas/_VendasPartial", await _vendaRepository.GetAllVendas());
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -10,5 +10,7 @@ namespace CamposDealerWebProject.Repositories.Interfaces
         public IEnumerable<Venda> GetVendaByNomeCliente(string nmCliente);
 
         public IEnumerable<Venda> GetVendaByDscProduto(string dscProduto);
+
+        public Task<List<Venda>> GetAllVendas();
     }
 }

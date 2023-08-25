@@ -1,0 +1,17 @@
+﻿@model List<Venda>
+
+
+@foreach (Venda venda in Model)
+{
+    <tr>
+        <td>@venda.QtdVenda</td>
+        <td>@venda.VlrUnitarioVenda.ToString("c")</td>
+        <td>@venda.DthVenda</td>
+        <td>@venda.VlrTotalVenda.ToString("c")</td>        
+        <td>@venda.Cliente.NmCliente</td>
+        <td>@venda.Produto.DscProduto <td>
+            <button type="button" class="btn btn-warning btn-sm" href="@venda.IdVenda"><img class="icon-prop" src="~/images/pencil_icon.png" /></button> |
+            <button type="button" class="btn btn-danger btn-sm" href="@venda.IdVenda"><img class="icon-prop" src="~/images/delete_ic_icon.png" /></button>
+        </td>
+    </tr>
+}    
