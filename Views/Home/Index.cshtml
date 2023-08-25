@@ -12,12 +12,12 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">                
-            @*<div class="container mt-3 p-2">                
-                <button type="button" class="btn btn-success mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#crudModalClient">
+            <div class="container mt-3 p-2">                
+                <button type="button" class="btn btn-success mt-2" id="inserirCliente">
                     Inserir cliente
                 </button>
-            </div>*@
-            <div class="container mt-3 p-2">
+            </div>
+            <div class="container p-2">
                 <table class="table table-hover table-bordered table-striped">
                     <thead class="table-dark">
                         <tr>                            
@@ -50,7 +50,7 @@
             </div><!--container-->
         </div><!--nav-product-->
         <div class="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-sales-tab">
-@*            <div class="container mt-3 p-2">
+            @*<div class="container mt-3 p-2">
                 <button type="button" class="btn btn-success mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#crudModalProduto">
                     Inserir venda
                 </button>
@@ -80,7 +80,11 @@
         $(document).ready(function () {
             $("#client-content-list").load("/Home/ClientesPartial");
             $("#product-content-list").load("/Home/ProdutosPartial");
-            $("#sales-content-list").load("/Home/VendasPartial");
+            $("#sales-content-list").load("/Home/VendasPartial");                       
+        });
+
+        $("#inserirCliente").click(function () {
+            console.log("click");
         });
     </script>
 }                            
