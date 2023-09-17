@@ -1,0 +1,28 @@
+﻿<div class="modal fade" id="productModalOperation" tabindex="-1" aria-labelledby="productModalOperationLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productModalOperationLabel">Inserir Produto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label type="text" hidden class="form-control" id="product-id"></label>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Descrição</label>
+                        <input type="text" class="form-control" id="product-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="number" class="col-form-label">Preço</label>
+                        <input type="number" pattern="[0-9]*" step="0.1" placeholder="R$" min="0" class="form-control" id="price-value">
+                    </div>
+                    <input type="reset" hidden class="btn btn-primary reset-fields">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary fechar" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" id="inserirProdutoModal" class="btn btn-primary">Inserir</button>                
+            </div>
+        </div>
+    </div>
+</div>

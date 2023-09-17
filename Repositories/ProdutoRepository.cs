@@ -14,6 +14,12 @@ namespace CamposDealerWebProject.Repositories
 
         public IEnumerable<Produto> Produtos => _context.Produtos;
 
+        public async Task AddProduct(Produto produto)
+        {
+            await _context.Produtos.AddAsync(produto);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<List<Produto>> GetAllProducts()
         {            
             return await _context.Produtos.ToListAsync();

@@ -1,0 +1,28 @@
+﻿<div class="modal fade" id="clientModalOperation" tabindex="-1" aria-labelledby="clientModalOperationLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="clientModalOperationLabel">Inserir Cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label type="text" hidden class="form-control" id="client-id"></label>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Nome</label>
+                        <input type="text" class="form-control" id="client-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Cidade</label>
+                        <input type="text" class="form-control" id="city-name">
+                    </div>
+                    <input type="reset" hidden class="btn btn-primary reset-fields">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary fechar" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" id="inserirClientModal" class="btn btn-primary">Inserir</button>                
+            </div>
+        </div>
+    </div>
+</div>

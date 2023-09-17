@@ -7,26 +7,40 @@
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-client-tab" data-bs-toggle="tab" data-bs-target="#nav-client" type="button" role="tab" aria-controls="nav-client" aria-selected="true">Clientes</button>
             <button class="nav-link" id="nav-product-tab" data-bs-toggle="tab" data-bs-target="#nav-product" type="button" role="tab" aria-controls="nav-product" aria-selected="false">Produtos</button>
-            <button class="nav-link" id="nav-sales-tab" data-bs-toggle="tab" data-bs-target="#nav-sales" type="button" role="tab" aria-controls="nav-sales" aria-selected="false">Vendas</button>
+            <button class="nav-link" id="nav-sales-tab" data-bs-toggle="tab" data-bs-target="#nav-sales" type="button" role="tab" aria-controls="nav-sales" aria-selected="false">Vendas</button>                        
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab"></div><!--nav-client-->        
-        <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab"></div><!--nav-product-->
-        <div class="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-sales-tab"></div><!--nav-sales-->
+        <div class="tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">
+            <div class="container mt-3 p-2">
+                <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#clientModalOperation" id="inserirCliente">Inserir cliente</button>
+            </div>
+            <div id="nav-client-view"></div>
+        </div><!--nav-client-->        
+        <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
+            <div class="container mt-3 p-2">
+                <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#productModalOperation">Inserir produto</button>
+            </div>
+            <div id="nav-product-view"></div>
+        </div><!--nav-product-->
+        <div class="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-sales-tab">
+            <div class="container mt-3 p-2">
+                <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#modalOperation">Inserir venda</button>
+            </div>
+            <div id="nav-sales-view"></div>
+        </div><!--nav-sales-->
     </div><!--nav-tabContent-->
 </div>
+
+<partial name="/Views/Clientes/_ModalPartialCliente.cshtml" />
+<partial name="/Views/Produtos/_ModalPartialProduto.cshtml" />
 
 @section scripts {
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#nav-client").load("/Clientes");
-            $("#nav-product").load("/Produtos");
-            $("#nav-sales").load("/Vendas");
-        });
-
-        $("#inserirCliente").click(function () {
-            console.log("click");
-        });
+            $("#nav-client-view").load("/Clientes");
+            $("#nav-product-view").load("/Produtos");
+            $("#nav-sales-view").load("/Vendas");
+        });    
     </script>
-}                            
+}
