@@ -11,76 +11,18 @@
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">                
-            <div class="container mt-3 p-2">                
-                <button type="button" class="btn btn-success mt-2" id="inserirCliente">
-                    Inserir cliente
-                </button>
-            </div>
-            <div class="container p-2">
-                <table class="table table-hover table-bordered table-striped">
-                    <thead class="table-dark">
-                        <tr>                            
-                            <th scope="col">Nome</th>
-                            <th scope="col">Cidade</th>
-                            <th scope="col">Ações</th>                            
-                        </tr>
-                    </thead>
-                    <tbody id="client-content-list"></tbody>
-                </table>                
-            </div><!--container-->
-        </div><!--nav-client-->
-        <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">          
-            @*<div class="container mt-3 p-2">
-                <button type="button" class="btn btn-success mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#crudModalProduto">
-                    Inserir produto
-                </button>
-            </div>*@
-            <div class="container mt-3 p-2">
-                <table class="table table-hover table-bordered table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th scope="col">Descrição</th>
-                            <th scope="col">Valor Unitário</th>
-                            <th scope="col">Ações</th>                            
-                        </tr>
-                    </thead>               
-                    <tbody id="product-content-list"></tbody>
-                </table>
-            </div><!--container-->
-        </div><!--nav-product-->
-        <div class="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-sales-tab">
-            @*<div class="container mt-3 p-2">
-                <button type="button" class="btn btn-success mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#crudModalProduto">
-                    Inserir venda
-                </button>
-            </div>*@
-            <div class="container mt-3 p-2">
-                <table class="table table-hover table-bordered table-striped">
-                    <thead class="table-dark">
-                        <tr>                            
-                            <th scope="col">Quantidade</th>
-                            <th scope="col">Valor Unitário</th>
-                            <th scope="col">Data</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Cliente</th>
-                            <th scope="col">Produto</th>
-                            <th scope="col">Ações</th>                            
-                        </tr>
-                    </thead>                  
-                    <tbody id="sales-content-list"></tbody>
-                </table>
-            </div>
-        </div><!--nav-sales-->
+        <div class="tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab"></div><!--nav-client-->        
+        <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab"></div><!--nav-product-->
+        <div class="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-sales-tab"></div><!--nav-sales-->
     </div><!--nav-tabContent-->
 </div>
 
 @section scripts {
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#client-content-list").load("/Home/ClientesPartial");
-            $("#product-content-list").load("/Home/ProdutosPartial");
-            $("#sales-content-list").load("/Home/VendasPartial");                       
+            $("#nav-client").load("/Clientes");
+            $("#nav-product").load("/Produtos");
+            $("#nav-sales").load("/Vendas");
         });
 
         $("#inserirCliente").click(function () {

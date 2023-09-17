@@ -6,17 +6,22 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CamposDealerWebProject.Context;
 using CamposDealerWebProject.Models;
+using CamposDealerWebProject.Repositories.Interfaces;
 
 namespace CamposDealerWebProject.Controllers
 {
     public class ClientesController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IClienteRepository _clienteRepository;
 
-        public ClientesController(AppDbContext context)
+        public ClientesController(IClienteRepository cliente)
         {
-            _context = context;
-        }      
-               
+            _clienteRepository = cliente;
+        }
+        
+        public async Task<IActionResult> Index()
+        {
+            return PartialView("../Clientes/_ClientesPartial", await _clienteRepository.GetAllClients());
+        }
     }
 }

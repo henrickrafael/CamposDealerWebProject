@@ -1,16 +1,21 @@
 ﻿using CamposDealerWebProject.Context;
+using CamposDealerWebProject.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CamposDealerWebProject.Controllers
 {
     public class ProdutosController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IProdutoRepository _produtoRepository;
 
-        public ProdutosController(AppDbContext context)
+        public ProdutosController(IProdutoRepository produto)
         {
-            _context = context;
+            _produtoRepository = produto;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            return PartialView("../Produtos/_ProdutosPartial", await _produtoRepository.GetAllProducts());
+        }
     }
 }

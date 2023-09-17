@@ -1,14 +1,31 @@
 ﻿@model List<Cliente>
 
+<div class="container mt-3 p-2">
+    <button type="button" class="btn btn-success mt-2" id="inserirCliente">
+        Inserir cliente
+    </button>
+</div>
+<div class="container p-2">
+    <table class="table table-hover table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Cidade</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>        
+            @foreach (Cliente cliente in Model)
+            {
+                <tr>
+                    <td>@cliente.NmCliente</td>
+                    <td>@cliente.Cidade</td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-sm" href="@cliente.IdCliente"><img class="icon-prop" src="~/images/pencil_icon.png" /></button> |
+                        <button type="button" class="btn btn-danger btn-sm" href="@cliente.IdCliente"><img class="icon-prop" src="~/images/delete_ic_icon.png" /></button>
+                    </td>
+                </tr>
+            }
+    </table>
+</div><!--container-->
 
-@foreach (Cliente cliente in Model)
-{   
-    <tr>       
-        <td>@cliente.NmCliente</td>
-        <td>@cliente.Cidade</td>
-        <td>
-            <button type="button" class="btn btn-warning btn-sm" href="@cliente.IdCliente"><img class="icon-prop" src="~/images/pencil_icon.png" /></button> |
-            <button type="button" class="btn btn-danger btn-sm" href="@cliente.IdCliente"><img class="icon-prop" src="~/images/delete_ic_icon.png" /></button>
-        </td>
-    </tr>
-}    
+  

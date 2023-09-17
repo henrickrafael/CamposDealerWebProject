@@ -1,14 +1,29 @@
 ﻿@model List<Produto>
 
-
-@foreach (Produto produto in Model)
-{
-    <tr>
-        <td>@produto.DscProduto</td>
-        <td>@produto.VlrUnitario.ToString("c")</td>
-        <td>
-            <button type="button" class="btn btn-warning btn-sm" href="@produto.IdProduto"><img class="icon-prop" src="~/images/pencil_icon.png" /></button> |
-            <button type="button" class="btn btn-danger btn-sm" href="@produto.IdProduto"><img class="icon-prop" src="~/images/delete_ic_icon.png" /></button>
-        </td>
-    </tr>
-}    
+<div class="container mt-3 p-2">
+<button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#crudModalProduto">
+    Inserir produto
+</button>
+</div>
+<div class="container p-2">
+<table class="table table-hover table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Descrição</th>
+            <th scope="col">Valor Unitário</th>
+            <th scope="col">Ações</th>
+        </tr>
+    </thead>
+        @foreach (Produto produto in Model)
+        {
+            <tr>
+                <td>@produto.DscProduto</td>
+                <td>@produto.VlrUnitario.ToString("c")</td>
+                <td>
+                    <button type="button" class="btn btn-warning btn-sm" href="@produto.IdProduto"><img class="icon-prop" src="~/images/pencil_icon.png" /></button> |
+                    <button type="button" class="btn btn-danger btn-sm" href="@produto.IdProduto"><img class="icon-prop" src="~/images/delete_ic_icon.png" /></button>
+                </td>
+            </tr>
+        }
+    </table>
+</div><!--container-->
