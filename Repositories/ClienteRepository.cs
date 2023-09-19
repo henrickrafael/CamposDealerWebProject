@@ -50,10 +50,8 @@ namespace CamposDealerWebProject.Repositories
             return _context.Clientes.OrderBy(cliente => cliente.IdCliente);
         }
 
-        public async Task UpdateClientById(int idCliente)
-        {
-            var cliente = await _context.Clientes.FindAsync(idCliente);
-
+        public async Task UpdateClientById(Cliente cliente)
+        {              
             if (cliente != null) {
                 _context.Clientes.Update(cliente);
                 await _context.SaveChangesAsync();

@@ -15,8 +15,7 @@ $("#clientModalOperation").on("hidden.bs.modal", function () {
 
 $("#inserirClientModal").click(function () {
     
-    var clientId = $('#client-id').val();
-    console.log(clientId);
+    var clientId = $('#client-id').val();    
 
     var cliente = {
         nmCliente: $('#client-name').val(),
@@ -25,12 +24,29 @@ $("#inserirClientModal").click(function () {
 
     if (clientId == null || clientId == 0 || clientId == undefined) {
         salvarDadosCliente(cliente);
-    } else if (clientId == null && clientId > 0) {
+    } else if (clientId != null && clientId > 0) {
         cliente.idCliente = clientId;
-        //Método para atualizar os dados do cliente.
+        atualizarDadosCliente(cliente);
     }
 
 });
+
+function atualizarDadosCliente(dadosCliente) {
+    $.ajax({
+        url: `Clientes/UpdateClientById`,
+        method: "POST",
+        data: {
+            cliente: dadosCliente
+        },
+        success: function () {
+            $("#nav-client-view").load("/Clientes");
+        }
+
+    });
+
+    esconderModal();
+    $(".reset-fields").click();
+}
 
 
 function getClientData(id) {
@@ -64,7 +80,7 @@ $("#inserirProdutoModal").click(function () {
 
     if (productId == null || productId == 0 || productId == undefined) {
         salvarDadosProduto(produto);
-    } else if (productId == null && productId > 0) {
+    } else if (productId != null && productId > 0) {
         produto.idProduto = productId;
         //Método para atualizar os dados do produto.
     }

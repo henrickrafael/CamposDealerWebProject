@@ -13,7 +13,7 @@ namespace CamposDealerWebProject.Repositories.Interfaces
 
         public Task DeleteClientById(int idCliente);
 
-        public Task UpdateClientById(int idCliente);
+        public Task UpdateClientById(Cliente cliente);
 
         public Task<Cliente> GetClientById(int idCliente);
 
