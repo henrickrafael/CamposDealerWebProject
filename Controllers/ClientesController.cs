@@ -35,5 +35,17 @@ namespace CamposDealerWebProject.Controllers
 
             return Json(ModelState);
         }
+
+        [HttpGet]
+        public async Task<JsonResult> GetClientById(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var cliente = await _clienteRepository.GetClientById(id);
+                return Json(cliente);
+            }
+
+            return Json(ModelState);
+        }
     }
 }

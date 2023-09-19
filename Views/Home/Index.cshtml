@@ -34,13 +34,3 @@
 
 <partial name="/Views/Clientes/_ModalPartialCliente.cshtml" />
 <partial name="/Views/Produtos/_ModalPartialProduto.cshtml" />
-
-@section scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#nav-client-view").load("/Clientes");
-            $("#nav-product-view").load("/Produtos");
-            $("#nav-sales-view").load("/Vendas");
-        });    
-    </script>
-}
