@@ -9,9 +9,14 @@ $("#inserirCliente").click(function () {
     alterarTituloModal("clientModalOperationLabel");
 })
 
+$("#clientModalOperation").on("hidden.bs.modal", function () {
+    $(".reset-fields").click();
+})
+
 $("#inserirClientModal").click(function () {
     
     var clientId = $('#client-id').val();
+    console.log(clientId);
 
     var cliente = {
         nmCliente: $('#client-name').val(),
