@@ -42,6 +42,12 @@ namespace CamposDealerWebProject.Repositories
             return cliente;
         }
 
+        public async Task<Cliente> GetClientByIdAsNoTracking(int idCliente)
+        {
+            return await _context.Clientes.AsNoTracking()
+                        .SingleOrDefaultAsync(c => c.IdCliente.Equals(idCliente));
+        }
+
         public IEnumerable<Cliente> GetClientByName(string nmCliente)
         {
             if(!string.IsNullOrWhiteSpace(nmCliente))
@@ -51,11 +57,15 @@ namespace CamposDealerWebProject.Repositories
         }
 
         public async Task UpdateClientById(Cliente cliente)
-        {              
-            if (cliente != null) {
+        {
+            var data = await GetClientByIdAsNoTracking(cliente.IdCliente);            
+
+            if (data != null)
+            {
                 _context.Clientes.Update(cliente);
                 await _context.SaveChangesAsync();
             }
+           
         }
     }
 }
