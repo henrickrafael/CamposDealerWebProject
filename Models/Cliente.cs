@@ -6,6 +6,18 @@ namespace CamposDealerWebProject.Models
     [Table("Clientes")]
     public class Cliente
     {
+        public Cliente()
+        { 
+        }
+
+        public Cliente(int idCliente, string nmCliente, string cidade, List<Venda> vendas)
+        {
+            IdCliente = idCliente;
+            NmCliente = nmCliente;
+            Cidade = cidade;
+            Vendas = vendas;
+        }
+
         [Key]
         public int IdCliente { get; set; }
 

@@ -48,6 +48,17 @@ function atualizarDadosCliente(dadosCliente) {
     $(".reset-fields").click();
 }
 
+function removerCliente(id) {
+    $.ajax({
+        url: `Clientes/DeleteClientById/${id}`,
+        method: "DELETE",        
+        timeout: 1000,
+        success: function () {
+            $("#nav-client-view").load("/Clientes");
+        }
+    });    
+}
+
 
 function getClientData(id) {
 

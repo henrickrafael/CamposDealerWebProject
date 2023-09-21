@@ -23,10 +23,12 @@ namespace CamposDealerWebProject.Repositories
 
         public async Task DeleteClientById(int idCliente)
         {
-            var cliente = await _context.Clientes.FindAsync(idCliente);
+            var buscaCliente = await GetClientByIdAsNoTracking(idCliente);            
 
-            if (cliente != null) {
-                _context.Clientes.Remove(cliente);
+            if (buscaCliente != null) {
+                _context.Clientes.Remove(new(buscaCliente.IdCliente, buscaCliente.NmCliente, 
+                                                buscaCliente.Cidade, buscaCliente.Vendas));
+
                 await _context.SaveChangesAsync();
             }
         }
@@ -58,9 +60,9 @@ namespace CamposDealerWebProject.Repositories
 
         public async Task UpdateClientById(Cliente cliente)
         {
-            var data = await GetClientByIdAsNoTracking(cliente.IdCliente);            
+            var buscaCliente = await GetClientByIdAsNoTracking(cliente.IdCliente);            
 
-            if (data != null)
+            if (buscaCliente != null)
             {
                 _context.Clientes.Update(cliente);
                 await _context.SaveChangesAsync();

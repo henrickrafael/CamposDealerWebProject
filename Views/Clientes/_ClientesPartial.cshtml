@@ -16,7 +16,7 @@
                     <td>@cliente.Cidade</td>
                     <td>
                     <button type="button" onclick="getClientData(@cliente.IdCliente)" data-bs-toggle="modal" data-bs-target="#clientModalOperation" class="btn btn-warning btn-sm" href="#clientModalOperation"><img class="icon-prop" src="~/images/pencil_icon.png" /></button> |
-                        <button type="button" class="btn btn-danger btn-sm" href="@cliente.IdCliente"><img class="icon-prop" src="~/images/delete_ic_icon.png" /></button>
+                    <button type="button" onclick="removerCliente(@cliente.IdCliente)" class="btn btn-danger btn-sm" href="@cliente.IdCliente"><img class="icon-prop" src="~/images/delete_ic_icon.png" /></button>
                     </td>
                 </tr>
             }
