@@ -9,6 +9,11 @@ $("#inserirCliente").click(function () {
     resetTituloModal("clientModalOperationLabel");
 })
 
+$("#inserirProduto").click(function () {
+    resetTituloModal("productModalOperationLabel");
+})
+
+
 $("#clientModalOperation").on("hidden.bs.modal", function () {
     $(".reset-fields").click();
 })
@@ -74,15 +79,35 @@ function getClientData(id) {
         dataType: "json",
         timeout: 1000,
         success: function (data) {
-            setModalData(data);
+            setModalDataCliente(data);
         }
     });    
 }
 
-function setModalData(clientData) {    
+function getProductData(id) {
+
+    alterarTituloModal("productModalOperationLabel");
+
+    $.ajax({
+        url: `Produtos/GetProductById/${id}`,
+        dataType: "json",
+        timeout: 1000,
+        success: function (data) {
+            setModalDataProduto(data);
+        }
+    });
+}
+
+function setModalDataCliente(clientData) {
     $("#client-id").val(clientData.idCliente);
     $('#client-name').val(clientData.nmCliente);
-    $('#city-name').val(clientData.cidade);    
+    $('#city-name').val(clientData.cidade);
+}
+
+function setModalDataProduto(clientData) {    
+    $("#product-id").val(clientData.idProduto);
+    $('#product-name').val(clientData.dscProduto);
+    $('#price-value').val(clientData.vlrUnitario);    
 }
 
 $("#inserirProdutoModal").click(function () {
@@ -98,10 +123,28 @@ $("#inserirProdutoModal").click(function () {
         salvarDadosProduto(produto);
     } else if (productId != null && productId > 0) {
         produto.idProduto = productId;
-        //Método para atualizar os dados do produto.
+        atualizarDadosProduto(produto);
     }
 
 });
+
+function atualizarDadosProduto(dadosProduto) {
+    $.ajax({
+        url: `Produtos/UpdateProductById`,
+        method: "POST",
+        data: {
+            produto: dadosProduto
+        },
+        success: function () {
+            $("#nav-client-view").load("/Produtos");
+            alert("Produto atualizado com sucesso!");
+        }
+
+    });
+
+    esconderModal();
+    $(".reset-fields").click();
+}
 
 $(".fechar").click(function () {
     $(".reset-fields").click();

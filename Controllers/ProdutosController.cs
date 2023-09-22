@@ -3,6 +3,7 @@ using CamposDealerWebProject.Models;
 using CamposDealerWebProject.Repositories;
 using CamposDealerWebProject.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace CamposDealerWebProject.Controllers
 {
@@ -30,5 +31,29 @@ namespace CamposDealerWebProject.Controllers
 
             return Json(ModelState);
         }
+
+        [HttpPost]
+        public async Task<JsonResult> UpdateProductById(Produto produto)
+        {
+            if (ModelState.IsValid)
+            {
+                await _produtoRepository.UpdateProductById(produto);
+            }
+
+            return Json(ModelState);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetProductById(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var produto = await _produtoRepository.GetProductById(id);
+                return Json(produto);
+            }
+
+            return Json(ModelState);
+        }
+
     }
 }

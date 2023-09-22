@@ -27,5 +27,24 @@ namespace CamposDealerWebProject.Repositories
 
         public IEnumerable<Produto> GetProductByDescription(string dscProduto)
             => _context.Produtos.Where(produto => produto.DscProduto.ToLower().Equals(dscProduto.ToLower()));
+
+        public async Task<Produto> GetProductById(int id)
+        {
+            var produto = await _context.Produtos.AsNoTracking()
+                .SingleOrDefaultAsync(c => c.IdProduto.Equals(id));
+
+            return produto;
+        }
+
+        public async Task UpdateProductById(Produto produto)
+        {
+            var consultaProduto = await GetProductById(produto.IdProduto);
+
+            if (consultaProduto != null)
+            { 
+                _context.Produtos.Update(consultaProduto);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
