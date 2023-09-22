@@ -25,10 +25,8 @@ namespace CamposDealerWebProject.Repositories
         {
             var buscaCliente = await GetClientByIdAsNoTracking(idCliente);            
 
-            if (buscaCliente != null) {
-                _context.Clientes.Remove(new(buscaCliente.IdCliente, buscaCliente.NmCliente, 
-                                                buscaCliente.Cidade, buscaCliente.Vendas));
-
+            if (buscaCliente != null) {                
+                _context.Clientes.Remove(buscaCliente);
                 await _context.SaveChangesAsync();
             }
         }

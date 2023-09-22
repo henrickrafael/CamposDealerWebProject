@@ -1,12 +1,12 @@
 ﻿$(document).ready(function () {
     $("#nav-client-view").load("/Clientes");
     $("#nav-product-view").load("/Produtos");
-    $("#nav-sales-view").load("/Vendas");
+    $("#nav-sales-view").load("/Vendas");    
 });    
 
 
 $("#inserirCliente").click(function () {
-    alterarTituloModal("clientModalOperationLabel");
+    resetTituloModal("clientModalOperationLabel");
 })
 
 $("#clientModalOperation").on("hidden.bs.modal", function () {
@@ -14,7 +14,7 @@ $("#clientModalOperation").on("hidden.bs.modal", function () {
 })
 
 $("#inserirClientModal").click(function () {
-    
+
     var clientId = $('#client-id').val();    
 
     var cliente = {
@@ -38,8 +38,9 @@ function atualizarDadosCliente(dadosCliente) {
         data: {
             cliente: dadosCliente
         },
-        success: function () {
+        success: function () {            
             $("#nav-client-view").load("/Clientes");
+            alert("Cliente atualizado com sucesso!");
         }
 
     });
@@ -49,14 +50,18 @@ function atualizarDadosCliente(dadosCliente) {
 }
 
 function removerCliente(id) {
-    $.ajax({
-        url: `Clientes/DeleteClientById/${id}`,
-        method: "DELETE",        
-        timeout: 1000,
-        success: function () {
-            $("#nav-client-view").load("/Clientes");
-        }
-    });    
+    var confirmarExclusao = confirm("Tem certeza que desjea remover este cliente?")
+
+    if (confirmarExclusao) { 
+        $.ajax({
+            url: `Clientes/DeleteClientById/${id}`,
+            method: "DELETE",        
+            timeout: 1000,
+            success: function () {
+                $("#nav-client-view").load("/Clientes");
+            }
+        });    
+    }
 }
 
 
@@ -109,10 +114,14 @@ function alterarTituloModal(id) {
     if (tituloModal.text().includes("Inserir")) {
         novoTitulo = tituloModal.text().replace("Inserir", "Atualizar");        
         tituloModal.text(novoTitulo);
-    } else {
-        novoTitulo = tituloModal.text().replace("Atualizar", "Inserir");
-        tituloModal.text(novoTitulo);
-    }
+    } 
+}
+
+function resetTituloModal(id) {
+    let tituloModal = $(`#${id}`);
+    let novoTitulo = tituloModal.text().replace("Atualizar", "Inserir");
+    
+    tituloModal.text(novoTitulo);
 }
 
 function salvarDadosProduto(dadosProduto) {
