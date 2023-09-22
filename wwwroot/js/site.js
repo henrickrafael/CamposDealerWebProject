@@ -18,6 +18,10 @@ $("#clientModalOperation").on("hidden.bs.modal", function () {
     $(".reset-fields").click();
 })
 
+$("#productModalOperation").on("hidden.bs.modal", function () {
+    $(".reset-fields").click();
+})
+
 $("#inserirClientModal").click(function () {
 
     var clientId = $('#client-id').val();    
@@ -136,7 +140,7 @@ function atualizarDadosProduto(dadosProduto) {
             produto: dadosProduto
         },
         success: function () {
-            $("#nav-client-view").load("/Produtos");
+            $("#nav-product-view").load("/Produtos");
             alert("Produto atualizado com sucesso!");
         }
 

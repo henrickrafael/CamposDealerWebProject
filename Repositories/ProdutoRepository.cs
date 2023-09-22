@@ -42,7 +42,7 @@ namespace CamposDealerWebProject.Repositories
 
             if (consultaProduto != null)
             { 
-                _context.Produtos.Update(consultaProduto);
+                _context.Produtos.Update(produto);
                 await _context.SaveChangesAsync();
             }
         }
