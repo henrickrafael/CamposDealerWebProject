@@ -59,7 +59,7 @@ function atualizarDadosCliente(dadosCliente) {
 }
 
 function removerCliente(id) {
-    var confirmarExclusao = confirm("Tem certeza que desjea remover este cliente?")
+    var confirmarExclusao = confirm("Tem certeza que deseja remover este cliente?")
 
     if (confirmarExclusao) { 
         $.ajax({
