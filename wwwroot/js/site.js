@@ -73,6 +73,20 @@ function removerCliente(id) {
     }
 }
 
+function removerProduto(id) {
+    var confirmarExclusao = confirm("Tem certeza que deseja remover este produto?")
+
+    if (confirmarExclusao) {
+        $.ajax({
+            url: `Produtos/DeleteProductById/${id}`,
+            method: "DELETE",
+            timeout: 1000,
+            success: function () {
+                $("#nav-product-view").load("/Produtos");
+            }
+        });
+    }
+}
 
 function getClientData(id) {
 

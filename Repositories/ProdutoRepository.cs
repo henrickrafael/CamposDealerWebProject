@@ -46,5 +46,16 @@ namespace CamposDealerWebProject.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task DeleteProductById(int id)
+        {
+            var consultaProduto = await GetProductById(id);
+
+            if (consultaProduto != null)
+            {
+                _context.Produtos.Remove(consultaProduto);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

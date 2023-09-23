@@ -12,6 +12,8 @@ namespace CamposDealerWebProject.Repositories.Interfaces
 
         public Task UpdateProductById(Produto produto);
 
+        public Task DeleteProductById(int id);
+
         public Task AddProduct(Produto produto);
 
         public Task<List<Produto>> GetAllProducts();

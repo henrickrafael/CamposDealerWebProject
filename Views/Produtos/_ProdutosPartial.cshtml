@@ -16,7 +16,7 @@
                 <td>@produto.VlrUnitario.ToString("c")</td>
                 <td>
                     <button type="button" onclick="getProductData(@produto.IdProduto)" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#productModalOperation" href="#productModalOperation"><img class="icon-prop" src="~/images/pencil_icon.png" /></button> |
-                    <button type="button" class="btn btn-danger btn-sm" href="@produto.IdProduto"><img class="icon-prop" src="~/images/delete_ic_icon.png" /></button>
+                    <button type="button" onclick="removerProduto(@produto.IdProduto)" class="btn btn-danger btn-sm" href="@produto.IdProduto"><img class="icon-prop" src="~/images/delete_ic_icon.png" /></button>
                 </td>
             </tr>
         }
