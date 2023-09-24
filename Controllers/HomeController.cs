@@ -10,6 +10,8 @@ namespace CamposDealerWebProject.Controllers
 {
     public class HomeController : Controller
     {
+        /*TODO: Avaliar a atualização dinâmica dos inputs="select" ou dropdonwlist, uma vez que pour utilizar os valores recebidos da model 
+         * não atualiza em tempo real ao adicionar um novo produto ou cliente, por exemplo*/
 
         private readonly IProdutoRepository _produtoRepository;
 
