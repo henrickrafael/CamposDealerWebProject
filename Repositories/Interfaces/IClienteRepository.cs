@@ -19,7 +19,9 @@ namespace CamposDealerWebProject.Repositories.Interfaces
 
         public Task<Cliente> GetClientByIdAsNoTracking(int idCliente);
 
-        public Task<List<Cliente>> GetAllClients();       
+        public Task<List<Cliente>> GetAllClients();
+
+        public List<Cliente> GetAllClientsResult();
     }
 
 }

@@ -32,6 +32,13 @@ namespace CamposDealerWebProject.Repositories
                 .Include(venda => venda.Produto).ToListAsync();
         }
 
+        public List<Venda> GetAllVendasResult()
+        {
+            return _context.Vendas
+                .Include(venda => venda.Cliente)
+                .Include(venda => venda.Produto).ToList();
+        }
+
         public IEnumerable<Venda> GetVendaByNomeCliente(string nmCliente)
         {
             if (!string.IsNullOrWhiteSpace(nmCliente))

@@ -25,6 +25,12 @@ namespace CamposDealerWebProject.Repositories
             return await _context.Produtos.ToListAsync();
         }
 
+        public List<Produto> GetAllProductsResult()
+        {
+            var produtos = _context.Produtos.ToList();
+            return produtos;
+        }
+
         public IEnumerable<Produto> GetProductByDescription(string dscProduto)
             => _context.Produtos.Where(produto => produto.DscProduto.ToLower().Equals(dscProduto.ToLower()));
 

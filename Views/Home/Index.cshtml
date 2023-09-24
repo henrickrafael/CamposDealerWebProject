@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ClienteProdutoViewModel
+
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -15,23 +17,29 @@
             <div class="container mt-3 p-2">
                 <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#clientModalOperation" id="inserirCliente">Inserir cliente</button>
             </div>
-            <div id="nav-client-view"></div>
+            <div id="nav-client-view">
+                <partial name="/Views/Clientes/_ClientesPartial.cshtml" model="@Model.clientes"/>
+            </div>
         </div><!--nav-client-->        
         <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
             <div class="container mt-3 p-2">
                 <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#productModalOperation" id="inserirProduto">Inserir produto</button>
             </div>
-            <div id="nav-product-view"></div>
+            <div id="nav-product-view">
+                <partial name="/Views/Produtos/_ProdutosPartial.cshtml" model="@Model.produtos" />
+            </div>
         </div><!--nav-product-->
         <div class="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-sales-tab">
             <div class="container mt-3 p-2">
                 <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#saleModalOperation">Inserir venda</button>
             </div>
-        <div id="nav-sales-view"></div>
+            <div id="nav-sales-view">
+                 <partial name="/Views/Vendas/_VendasPartial.cshtml" model="@Model.vendas" />
+            </div>
         </div><!--nav-sales-->
     </div><!--nav-tabContent-->
 </div>
 
 <partial name="/Views/Clientes/_ModalPartialCliente.cshtml" />
 <partial name="/Views/Produtos/_ModalPartialProduto.cshtml" />
-<partial name="/Views/Vendas/_ModalPartialVenda.cshtml" />
+<partial name="/Views/Vendas/_ModalPartialVenda.cshtml" model="@Model" />
