@@ -221,3 +221,11 @@ function esconderModal() {
     $(".modal").modal('hide');
 }
 
+function getSaleModellist(list) {    
+    console.log(list);
+    /*retornarListaProdutos(list);*/
+}
+
+//function retornarListaProdutos(list) {
+    
+//}
