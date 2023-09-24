@@ -217,3 +217,7 @@ function esconderModal() {
 function setValorUnitario(vlr) {
     $("#unity-value").val(vlr);    
 }
+
+//TODO: Alterar e investigar o motivo do valor estar vindo arredondado ao definir as propriedades do campo valor unitário
+//TODO: Corrigir a lógica de inserção de valores ao realizar a chamada do Ajax, pois os valores não estão condizentes entre o valor informado e valor salvo no banco de dados
+//TODO: aplicar sweet alert eventualmente

@@ -13,6 +13,7 @@ namespace CamposDealerWebProject.Models
         [Display(Name = "Quantidade do produto")]        
         public int QtdVenda { get; set; }
 
+        //TODO: avaliar remoção do campo vlrUnitárioVenda, simplesmente não faz sentido. Obs: Atualizar migrations
         [Required(ErrorMessage = "Campo de prenchimento obrigatório!")]
         [Column(TypeName = "decimal(5,2)")]
         public float VlrUnitarioVenda { get; set; }
