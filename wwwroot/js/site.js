@@ -15,6 +15,33 @@ $("#productModalOperation").on("hidden.bs.modal", function () {
     $(".reset-fields").click();
 });
 
+//function setOnlyNumbers(event, valueInput) {
+//    var asciiCode = (event.which) ? event.which : event.keyCode
+
+//    if (asciiCode == 46) {
+//        if (valueInput.value.indexOf('.') === -1 && valueInput.value) {
+//            return true;
+//        }
+//        return false;
+//    }
+
+//    if (asciiCode > 31 && (asciiCode < 48 || asciiCode > 57)) {
+//        return false;
+//    }
+
+//    return true;
+//}
+
+function setOnlyNumbers(valueInput) {
+    var regex = new RegExp(/^\d*\.?\d*$/);
+
+    if (regex.test(valueInput)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 $("#inserirClientModal").click(function () {
 
     var clientId = $('#client-id').val();    
@@ -127,8 +154,8 @@ $("#inserirProdutoModal").click(function () {
 
     var produto = {
         dscProduto: $('#product-name').val(),
-        vlrUnitario: $('#price-value').val()
-    };
+        vlrUnitario: $('#price-value').val().replace(".", ",")    
+    };    
 
     if (productId == null || productId == 0 || productId == undefined) {
         salvarDadosProduto(produto);
@@ -216,6 +243,11 @@ function esconderModal() {
 
 function setValorUnitario(vlr) {
     $("#unity-value").val(vlr);    
+}
+
+function setTotalValue(vlr) {
+    let total = vlr * $("#unity-value").val();
+    $("#total-value").val(total);
 }
 
 //TODO: Alterar e investigar o motivo do valor estar vindo arredondado ao definir as propriedades do campo valor unitário
