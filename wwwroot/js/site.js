@@ -15,31 +15,29 @@ $("#productModalOperation").on("hidden.bs.modal", function () {
     $(".reset-fields").click();
 });
 
-//function setOnlyNumbers(event, valueInput) {
-//    var asciiCode = (event.which) ? event.which : event.keyCode
+function setOnlyNumbers(event, valueInput, useDot) {
+    console.log("chamada realizada");
 
-//    if (asciiCode == 46) {
-//        if (valueInput.value.indexOf('.') === -1 && valueInput.value) {
-//            return true;
-//        }
-//        return false;
-//    }
+    var asciiCode = (event.which) ? event.which : event.keyCode
 
-//    if (asciiCode > 31 && (asciiCode < 48 || asciiCode > 57)) {
-//        return false;
-//    }
+    if (useDot) { 
+        if (asciiCode == 46) {
+            if (valueInput.value.indexOf('.') === -1) {
+                return true;
+            }
+            return false;
+        }
+    }
 
-//    return true;
-//}
-
-function setOnlyNumbers(valueInput) {
-    var regex = new RegExp(/^\d*\.?\d*$/);
-
-    if (regex.test(valueInput)) {
-        return true;
-    } else {
+    if (asciiCode > 31 && (asciiCode < 48 || asciiCode > 57)) {
         return false;
     }
+
+    return true;
+}
+
+function setDefaultValue(prop) {
+    prop.value = 0;
 }
 
 $("#inserirClientModal").click(function () {
@@ -243,13 +241,13 @@ function esconderModal() {
 
 function setValorUnitario(vlr) {
     $("#unity-value").val(vlr);    
+
+    setTotalValue(vlr, $("sale-qtd").val());
 }
 
-function setTotalValue(vlr) {
-    let total = vlr * $("#unity-value").val();
-    $("#total-value").val(total);
+function setTotalValue(vlr, qtd) {
+    let total = vlr * qtd;
+    $("#total-value").val(total.toFixed(2));
 }
 
-//TODO: Alterar e investigar o motivo do valor estar vindo arredondado ao definir as propriedades do campo valor unitário
-//TODO: Corrigir a lógica de inserção de valores ao realizar a chamada do Ajax, pois os valores não estão condizentes entre o valor informado e valor salvo no banco de dados
 //TODO: aplicar sweet alert eventualmente
