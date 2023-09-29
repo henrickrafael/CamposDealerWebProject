@@ -24,14 +24,25 @@ namespace CamposDealerWebProject.Controllers
             _produtoRepository = produtoRepository;
             _clienteRepository = clienteRepository;            
             _vendaRepository = vendaRepository;
-        }       
-
+        }
+        
         public IActionResult Index()
         {            
             return View(new ClienteProdutoViewModel { clientes = _clienteRepository.GetAllClientsResult(), 
                                                       produtos = _produtoRepository.GetAllProductsResult(),
                                                       vendas = _vendaRepository.GetAllVendasResult()});
-        }      
+        }
+
+        [HttpGet]
+        public Task<JsonResult> GetViewModel()
+        {
+            return Task.FromResult(Json(new ClienteProdutoViewModel
+            {
+                clientes = _clienteRepository.GetAllClientsResult(),
+                produtos = _produtoRepository.GetAllProductsResult(),
+                vendas = _vendaRepository.GetAllVendasResult()
+            }));
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

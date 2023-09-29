@@ -16,8 +16,7 @@ $("#productModalOperation").on("hidden.bs.modal", function () {
 });
 
 function setOnlyNumbers(event, valueInput, useDot) {
-    console.log("chamada realizada");
-
+    
     var asciiCode = (event.which) ? event.which : event.keyCode
 
     if (useDot) { 
@@ -129,12 +128,12 @@ function getProductData(id) {
         dataType: "json",
         timeout: 1000,
         success: function (data) {
-            setModalDataProduto(data);
+            setModalDataProduto(data);            
         }
     });
 }
 
-function setModalDataCliente(clientData) {
+function setModalDataCliente(clientData) {    
     $("#client-id").val(clientData.idCliente);
     $('#client-name').val(clientData.nmCliente);
     $('#city-name').val(clientData.cidade);
@@ -172,14 +171,40 @@ function atualizarDadosProduto(dadosProduto) {
             produto: dadosProduto
         },
         success: function () {
-            $("#nav-product-view").load("/Produtos");            
+            $("#nav-product-view").load("/Produtos");                        
             alert("Produto atualizado com sucesso!");
+
+            getUpdatedViewModel();            
         }
 
     });
 
     esconderModal();
     $(".reset-fields").click();
+}
+
+function atualizarViewModelVendas(modelData) {       
+   
+    $.ajax({
+        url: "/Vendas/GetUpdatedSaleIndex",
+        type: "POST",        
+        data: { model: JSON.stringify(modelData) },
+        timeout: 1000,        
+        success: function () {
+            alert("deu boa?");
+        }
+    });
+}
+
+function getUpdatedViewModel() {    
+    return $.ajax({
+        url: "/Home/GetViewModel",
+        dataType: "json",
+        timeout: 1000,
+        success: function (data) {
+            atualizarViewModelVendas(data);
+        }
+    })
 }
 
 $(".fechar").click(function () {
@@ -211,7 +236,7 @@ function salvarDadosProduto(dadosProduto) {
             produto: dadosProduto
         },
         success: function () {
-            $("#nav-product-view").load("/Produtos");            
+            $("#nav-product-view").load("/Produtos");                 
         }
     });
 
