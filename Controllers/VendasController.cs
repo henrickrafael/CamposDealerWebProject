@@ -25,10 +25,13 @@ namespace CamposDealerWebProject.Controllers
             return PartialView("../Vendas/_VendasPartial", await _vendaRepository.GetAllVendas());
         }
 
-        [HttpPost]
+        [HttpGet]
         public PartialViewResult GetUpdatedSaleIndex(string model)
-        {
-            var result = JsonConvert.DeserializeObject<ClienteProdutoViewModel>(model);
+        {            
+            var modelDataEncoded = Convert.FromBase64String(model);
+            var modelDataDecoded = System.Text.Encoding.UTF8.GetString(modelDataEncoded);
+
+            var result = JsonConvert.DeserializeObject<ClienteProdutoViewModel>(modelDataDecoded);
             return PartialView("../Vendas/_ModalPartialVenda", result);
         }
 

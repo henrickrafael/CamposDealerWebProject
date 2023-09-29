@@ -171,10 +171,10 @@ function atualizarDadosProduto(dadosProduto) {
             produto: dadosProduto
         },
         success: function () {
-            $("#nav-product-view").load("/Produtos");                        
-            alert("Produto atualizado com sucesso!");
+            $("#nav-product-view").load("/Produtos");
+            getUpdatedViewModel();
 
-            getUpdatedViewModel();            
+            alert("Produto atualizado com sucesso!");            
         }
 
     });
@@ -184,16 +184,11 @@ function atualizarDadosProduto(dadosProduto) {
 }
 
 function atualizarViewModelVendas(modelData) {       
-   
-    $.ajax({
-        url: "/Vendas/GetUpdatedSaleIndex",
-        type: "POST",        
-        data: { model: JSON.stringify(modelData) },
-        timeout: 1000,        
-        success: function () {
-            alert("deu boa?");
-        }
-    });
+    var model = JSON.stringify(modelData);
+    var modelEncoded = window.btoa(model); 
+
+    $("#nav-sales-view").load("/Vendas");
+    $("#sale-modal-wrapper").load(`/Vendas/GetUpdatedSaleIndex?model=${modelEncoded}`);   
 }
 
 function getUpdatedViewModel() {    
