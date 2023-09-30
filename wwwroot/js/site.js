@@ -39,6 +39,15 @@ function setDefaultValue(prop) {
     prop.value = 0;
 }
 
+$("#inserirVendaModal").click(function () {
+    var saleId = $('#sale-id').val();
+
+    var venda = {
+        qtdVenda: $('#sale-qtd').val(),
+
+    }
+});
+
 $("#inserirClientModal").click(function () {
 
     var clientId = $('#client-id').val();    
@@ -66,6 +75,8 @@ function atualizarDadosCliente(dadosCliente) {
         },
         success: function () {            
             $("#nav-client-view").load("/Clientes");
+            getUpdatedViewModel();
+
             alert("Cliente atualizado com sucesso!");
         }
 
