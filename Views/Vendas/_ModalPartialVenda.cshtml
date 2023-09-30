@@ -13,17 +13,17 @@
                         <label type="text" hidden class="form-control" id="sale-id"></label>
                         <div class="mb-3">
                             <label for="produtos" class="col-form-label">Produto</label>
-                            <select id="product-id" class="form-select produtos" aria-label="Selecione">
+                            <select id="product-id" onchange="setDropDownValue(this)" class="form-select produtos" aria-label="Selecione">
                                 <option value="" selected>Selecione</option>
                                 @foreach (var produto in Model.produtos)
                                 {
-                                    <option onclick="setValorUnitario(@produto.VlrUnitario.ToString().Replace(",", "."))" onchange="console.log('mudou')" value="@produto.IdProduto">@produto.DscProduto</option>                                
+                                    <option onclick="setValorUnitario(@produto.VlrUnitario.ToString().Replace(",", "."))" value="@produto.IdProduto">@produto.DscProduto</option>                                
                                 }                            
                             </select>                        
                         </div>
                         <div class="mb-3">
                             <label for="clientes" class="col-form-label">Cliente</label>
-                            <select id="client-id" class="form-select clientes" aria-label="Selecione">
+                            <select id="client-id" onchange="setDropDownValue(this)" class="form-select clientes" aria-label="Selecione">
                                 <option value="" selected>Selecione</option>
                                 @foreach (var cliente in Model.clientes)
                                 {
@@ -47,7 +47,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary fechar" onclick="$('.reset-fields').click()" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-secondary fechar" onclick="resetAll()" data-bs-dismiss="modal">Fechar</button>
                     <button type="button" id="inserirVendaModal" class="btn btn-primary">Salvar</button>                
                 </div>
             </div>

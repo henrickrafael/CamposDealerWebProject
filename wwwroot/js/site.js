@@ -15,6 +15,23 @@ $("#productModalOperation").on("hidden.bs.modal", function () {
     $(".reset-fields").click();
 });
 
+function resetAll() {
+    $(".reset-fields").click();
+}
+
+function now() {
+    const date = new Date();
+
+    let ano = date.getFullYear();
+    let mes = String(date.getMonth() + 1).padStart(2, "0");
+    let dia = String(date.getDate()).padStart(2, "0");
+    let hora = date.getHours();
+    let minutos = date.getMinutes();
+    let segundos = date.getSeconds();
+
+    return `${ano}-${mes}-${dia} ${hora}:${minutos}:${segundos}`
+}
+
 function setOnlyNumbers(event, valueInput, useDot) {
     
     var asciiCode = (event.which) ? event.which : event.keyCode
@@ -39,14 +56,29 @@ function setDefaultValue(prop) {
     prop.value = 0;
 }
 
+function setDropDownValue(element) {
+    $(`#${element.id}`).val(element.value);   
+}
+
 $("#inserirVendaModal").click(function () {
     var saleId = $('#sale-id').val();
 
     var venda = {
         qtdVenda: $('#sale-qtd').val(),
+        dthVenda: now(),
+        vlrTotalVenda: $('#total-value').val(),
+        produtoId: $('#product-id').val(),
+        clienteId: $('#client-id').val()
+    }
 
+    if (saleId == null || saleId == 0 || saleId == undefined) {
+        salvarDadosVenda(venda);
+    } else if (saleId != null && saleId > 0) {
+        venda.idVenda = saleId;
+        //atualizarDadosVenda(venda);
     }
 });
+
 
 $("#inserirClientModal").click(function () {
 
@@ -83,7 +115,7 @@ function atualizarDadosCliente(dadosCliente) {
     });
 
     esconderModal();
-    $(".reset-fields").click();
+    resetAll();
 }
 
 function removerCliente(id) {
@@ -191,7 +223,7 @@ function atualizarDadosProduto(dadosProduto) {
     });
 
     esconderModal();
-    $(".reset-fields").click();
+    resetAll();
 }
 
 function atualizarViewModelVendas(modelData) {       
@@ -234,6 +266,23 @@ function resetTituloModal(id) {
     tituloModal.text(novoTitulo);
 }
 
+function salvarDadosVenda(dadosVenda) {
+    $.ajax({
+        url: "Vendas/AddSale",
+        method: "POST",
+        data: {
+            venda: dadosVenda
+        },
+        success: function () {
+            $("#nav-sales-view").load("/Vendas");
+            alert("Venda inserida com sucesso!");
+        }
+    });
+
+    esconderModal();
+    resetAll();
+}
+
 function salvarDadosProduto(dadosProduto) {
     $.ajax({
         url: "Produtos/AddProduct",
@@ -247,7 +296,7 @@ function salvarDadosProduto(dadosProduto) {
     });
 
     esconderModal();
-    $(".reset-fields").click();
+    resetAll();
 }
 
 function salvarDadosCliente(dadosCliente) {
@@ -263,7 +312,7 @@ function salvarDadosCliente(dadosCliente) {
     });
 
     esconderModal();    
-    $(".reset-fields").click();
+    resetAll();
 }   
 
 function esconderModal() {

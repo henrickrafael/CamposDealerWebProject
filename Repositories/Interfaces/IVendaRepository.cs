@@ -14,5 +14,7 @@ namespace CamposDealerWebProject.Repositories.Interfaces
         public Task<List<Venda>> GetAllVendas();
 
         public List<Venda> GetAllVendasResult();
+
+        public Task AddSale(Venda venda);
     }
 }

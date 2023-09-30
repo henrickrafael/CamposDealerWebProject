@@ -35,5 +35,16 @@ namespace CamposDealerWebProject.Controllers
             return PartialView("../Vendas/_ModalPartialVenda", result);
         }
 
+        [HttpPost]
+        public async Task<JsonResult> AddSale(Venda venda)
+        {
+            if (ModelState.IsValid)
+            {
+                await _vendaRepository.AddSale(venda);
+            }
+
+            return Json(ModelState);
+        }
+
     }
 }

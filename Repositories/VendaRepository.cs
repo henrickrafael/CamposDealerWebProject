@@ -39,6 +39,12 @@ namespace CamposDealerWebProject.Repositories
                 .Include(venda => venda.Produto).ToList();
         }
 
+        public async Task AddSale(Venda venda)
+        {
+            await _context.Vendas.AddAsync(venda);
+            await _context.SaveChangesAsync();
+        }        
+
         public IEnumerable<Venda> GetVendaByNomeCliente(string nmCliente)
         {
             if (!string.IsNullOrWhiteSpace(nmCliente))
