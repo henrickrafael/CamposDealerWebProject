@@ -19,6 +19,30 @@ function resetAll() {
     $(".reset-fields").click();
 }
 
+function getSaleData(id) {    
+    $.ajax({
+        url: `Vendas/GetVendaById/${id}`,
+        dataType: "JSON",
+        timeout: 1000,
+        success: function (data) {
+            setModalDataVenda(data)
+        }
+
+    });
+}
+
+function setModalDataVenda(dataVenda) {
+    $('#sale-id').val(dataVenda.idVenda);
+    $('#sale-qtd').val(dataVenda.qtdVenda);
+    $('#total-value').val(dataVenda.vlrTotalVenda);
+    $('#product-id').val(dataVenda.produtoId);
+    $('#client-id').val(dataVenda.clienteId);
+    $('#unity-value').val(dataVenda.produto.vlrUnitario);
+
+    $(`#product-id option[value="${dataVenda.produtoId}"]`).prop('selected', true);
+    $(`#client-id option[value="${dataVenda.clienteId}"]`).prop('selected', true);
+}
+
 function now() {
     const date = new Date();
 

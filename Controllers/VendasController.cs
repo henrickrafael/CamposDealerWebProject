@@ -14,10 +14,12 @@ namespace CamposDealerWebProject.Controllers
     {
         
         private readonly IVendaRepository _vendaRepository;
+        private readonly IProdutoRepository _produtoRepository;
 
-        public VendasController(IVendaRepository vendaRepository)
+        public VendasController(IVendaRepository vendaRepository, IProdutoRepository produtoRepository)
         {
             _vendaRepository = vendaRepository;
+            _produtoRepository = produtoRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -33,6 +35,18 @@ namespace CamposDealerWebProject.Controllers
 
             var result = JsonConvert.DeserializeObject<ClienteProdutoViewModel>(modelDataDecoded);
             return PartialView("../Vendas/_ModalPartialVenda", result);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetVendaById(int id)
+        {
+            if (ModelState.IsValid)
+            { 
+                var result = await _vendaRepository.GetVendaById(id, _produtoRepository);
+                return Json(result);
+            }
+
+            return Json(ModelState);
         }
 
         [HttpPost]

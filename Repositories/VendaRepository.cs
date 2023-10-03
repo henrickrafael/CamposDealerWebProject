@@ -43,7 +43,15 @@ namespace CamposDealerWebProject.Repositories
         {
             await _context.Vendas.AddAsync(venda);
             await _context.SaveChangesAsync();
-        }        
+        }
+
+        public async Task<Venda> GetVendaById(int idVenda, IProdutoRepository produtoRepository)
+        {
+           var vendaResult = await _context.Vendas.FindAsync(idVenda);
+           vendaResult.Produto = await produtoRepository.GetProductById(vendaResult.ProdutoId);
+
+           return vendaResult;
+        }
 
         public IEnumerable<Venda> GetVendaByNomeCliente(string nmCliente)
         {
