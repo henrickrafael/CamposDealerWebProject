@@ -6,6 +6,9 @@ $("#inserirProduto").click(function () {
     resetTituloModal("productModalOperationLabel");
 });
 
+$("#inserirVenda").click(function () {
+    resetTituloModal("saleModalOperationLabel");
+});
 
 $("#clientModalOperation").on("hidden.bs.modal", function () {
     $(".reset-fields").click();
@@ -15,11 +18,18 @@ $("#productModalOperation").on("hidden.bs.modal", function () {
     $(".reset-fields").click();
 });
 
+$("#saleModalOperation").on("hidden.bs.modal", function () {
+    $(".reset-fields").click();
+});
+
 function resetAll() {
     $(".reset-fields").click();
 }
 
 function getSaleData(id) {    
+
+    alterarTituloModal("saleModalOperationLabel");
+
     $.ajax({
         url: `Vendas/GetVendaById/${id}`,
         dataType: "JSON",
