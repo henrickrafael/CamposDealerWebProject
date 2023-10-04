@@ -109,9 +109,25 @@ $("#inserirVendaModal").click(function () {
         salvarDadosVenda(venda);
     } else if (saleId != null && saleId > 0) {
         venda.idVenda = saleId;
-        //atualizarDadosVenda(venda);
+        atualizarDadosVenda(venda);
     }
 });
+
+function atualizarDadosVenda(dadosVenda) {
+    $.ajax({
+        url: "Vendas/UpdateSaleById",
+        method: "POST",
+        data: {
+            venda: dadosVenda
+        },
+        success: () => {
+            $("#nav-sale-view").load("/Vendas");
+            getUpdatedViewModel();
+
+            alert("Venda atualizada com sucesso!");
+        }
+    });
+}
 
 
 $("#inserirClientModal").click(function () {

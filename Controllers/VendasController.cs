@@ -60,5 +60,15 @@ namespace CamposDealerWebProject.Controllers
             return Json(ModelState);
         }
 
+        [HttpPost]
+        public async Task<JsonResult> UpdateSaleById(Venda venda)
+        {
+            if (ModelState.IsValid)
+            { 
+                await _vendaRepository.UpdateSaleById(venda);
+            }
+
+            return Json(ModelState);
+        }
     }
 }

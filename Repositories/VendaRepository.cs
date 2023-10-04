@@ -53,6 +53,23 @@ namespace CamposDealerWebProject.Repositories
            return vendaResult;
         }
 
+        public async Task<Venda> GetVendaAsyncWithNoTracking(int id)
+        {
+            return await _context.Vendas.AsNoTracking()
+                                        .SingleOrDefaultAsync(c => c.IdVenda.Equals(id));
+        }
+
+        public async Task UpdateSaleById(Venda venda)
+        {
+            var consultaVenda = await GetVendaAsyncWithNoTracking(venda.IdVenda);
+
+            if (consultaVenda != null)
+            {
+                _context.Vendas.Update(venda);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public IEnumerable<Venda> GetVendaByNomeCliente(string nmCliente)
         {
             if (!string.IsNullOrWhiteSpace(nmCliente))
