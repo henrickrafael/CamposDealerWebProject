@@ -91,7 +91,7 @@ function setDefaultValue(prop) {
 }
 
 function setDropDownValue(element) {
-    $(`#${element.id}`).val(element.value);   
+    $(`#${element.id}`).val(element.value);       
 }
 
 function inserirDadosVenda() {
@@ -373,13 +373,12 @@ function esconderModal() {
 
 function setValorUnitario(vlr) {
     $("#unity-value").val(vlr);    
-
-    setTotalValue(vlr, $("sale-qtd").val());
+    setTotalValue(vlr, $("#sale-qtd").val());    
 }
 
 function setTotalValue(vlr, qtd) {
     let total = vlr * qtd;
-    $("#total-value").val(total.toFixed(2));
+    $("#total-value").val(total.toFixed(2));    
 }
 
 //TODO: aplicar sweet alert eventualmente
