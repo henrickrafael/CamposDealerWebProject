@@ -24,7 +24,7 @@
                 <td>@venda.Produto.DscProduto
                 <td>
                     <button type="button" onclick="getSaleData(@venda.IdVenda)" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#saleModalOperation" href="#saleModalOperation"><img class="icon-prop" src="~/images/pencil_icon.png" /></button> |
-                    <button type="button" class="btn btn-danger btn-sm" href="@venda.IdVenda"><img class="icon-prop" src="~/images/delete_ic_icon.png" /></button>
+                    <button type="button" onclick="removerVenda(@venda.IdVenda)" class="btn btn-danger btn-sm" href="@venda.IdVenda"><img class="icon-prop" src="~/images/delete_ic_icon.png" /></button>
                 </td>
             </tr>
         }

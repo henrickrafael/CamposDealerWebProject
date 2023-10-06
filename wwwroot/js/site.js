@@ -170,8 +170,23 @@ function atualizarDadosCliente(dadosCliente) {
     resetAll();
 }
 
+function removerVenda(id) {
+    var confirmarExclusao = confirm("Tem certeza que deseja remover esta venda?");
+
+    if (confirmarExclusao) {
+        $.ajax({
+            url: `Vendas/DeleteSaleById/${id}`,
+            method: "DELETE",
+            timeout: 1000,
+            success: () => {
+                $("#nav-sales-view").load("/Vendas");
+            }
+        });
+    }
+}
+
 function removerCliente(id) {
-    var confirmarExclusao = confirm("Tem certeza que deseja remover este cliente?")
+    var confirmarExclusao = confirm("Tem certeza que deseja remover este cliente?");
 
     if (confirmarExclusao) { 
         $.ajax({
@@ -179,6 +194,7 @@ function removerCliente(id) {
             method: "DELETE",        
             timeout: 1000,
             success: function () {
+                getUpdatedViewModel();
                 $("#nav-client-view").load("/Clientes");
             }
         });    
@@ -186,7 +202,7 @@ function removerCliente(id) {
 }
 
 function removerProduto(id) {
-    var confirmarExclusao = confirm("Tem certeza que deseja remover este produto?")
+    var confirmarExclusao = confirm("Tem certeza que deseja remover este produto?");
 
     if (confirmarExclusao) {
         $.ajax({
@@ -194,6 +210,7 @@ function removerProduto(id) {
             method: "DELETE",
             timeout: 1000,
             success: function () {
+                getUpdatedViewModel();
                 $("#nav-product-view").load("/Produtos");
             }
         });
@@ -343,6 +360,7 @@ function salvarDadosProduto(dadosProduto) {
             produto: dadosProduto
         },
         success: function () {
+            getUpdatedViewModel();
             $("#nav-product-view").load("/Produtos");                 
         }
     });
@@ -358,7 +376,8 @@ function salvarDadosCliente(dadosCliente) {
         data: {
             cliente: dadosCliente
         },
-        success: function () {            
+        success: function () {          
+            getUpdatedViewModel();
             $("#nav-client-view").load("/Clientes");            
         }
     });

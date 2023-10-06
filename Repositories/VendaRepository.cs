@@ -14,29 +14,32 @@ namespace CamposDealerWebProject.Repositories
             => _context = context;
 
         public IEnumerable<Venda> Vendas => _context.Vendas
-            .Include(venda => venda.Cliente)
-            .Include(venda => venda.Produto);
+                                                    .Include(venda => venda.Cliente)
+                                                    .Include(venda => venda.Produto);
 
         public IEnumerable<Venda> GetVendaByDscProduto(string dscProduto)
         {
             if (!string.IsNullOrWhiteSpace(dscProduto))
-                return _context.Vendas.Include(venda => venda.Cliente).Include(venda => venda.Produto).Where(venda => venda.Produto.DscProduto.ToLower().Equals(dscProduto.ToLower()));
+                return _context.Vendas.Include(venda => venda.Cliente)
+                                      .Include(venda => venda.Produto)
+                                      .Where(venda => venda.Produto.DscProduto.ToLower().Equals(dscProduto.ToLower()));
 
-            return _context.Vendas.Include(venda => venda.Cliente).Include(venda => venda.Produto).OrderBy(venda => venda.IdVenda);
+            return _context.Vendas.Include(venda => venda.Cliente)
+                                  .Include(venda => venda.Produto).OrderBy(venda => venda.IdVenda);
         }
 
         public async Task<List<Venda>> GetAllVendas() 
         {
             return await _context.Vendas
-                .Include(venda => venda.Cliente)
-                .Include(venda => venda.Produto).ToListAsync();
+                                 .Include(venda => venda.Cliente)
+                                 .Include(venda => venda.Produto).ToListAsync();
         }
 
         public List<Venda> GetAllVendasResult()
         {
             return _context.Vendas
-                .Include(venda => venda.Cliente)
-                .Include(venda => venda.Produto).ToList();
+                           .Include(venda => venda.Cliente)
+                           .Include(venda => venda.Produto).ToList();
         }
 
         public async Task AddSale(Venda venda)
@@ -73,9 +76,24 @@ namespace CamposDealerWebProject.Repositories
         public IEnumerable<Venda> GetVendaByNomeCliente(string nmCliente)
         {
             if (!string.IsNullOrWhiteSpace(nmCliente))
-                return _context.Vendas.Include(venda => venda.Cliente).Include(venda => venda.Produto).Where(venda => venda.Cliente.NmCliente.ToLower().Equals(nmCliente.ToLower()));
+                return _context.Vendas.Include(venda => venda.Cliente)
+                                      .Include(venda => venda.Produto)
+                                      .Where(venda => venda.Cliente.NmCliente.ToLower().Equals(nmCliente.ToLower()));
 
-            return _context.Vendas.Include(venda => venda.Cliente).Include(venda => venda.Produto).OrderBy(venda => venda.IdVenda);
+            return _context.Vendas.Include(venda => venda.Cliente)
+                                  .Include(venda => venda.Produto).OrderBy(venda => venda.IdVenda);
+        }
+
+        public async Task DeleteSaleById(int id)
+        {
+            var consultaVenda = await GetVendaAsyncWithNoTracking(id);
+
+            if (consultaVenda != null)
+            {
+                _context.Vendas.Remove(consultaVenda);
+                await _context.SaveChangesAsync();
+            }
+
         }
     }
 }

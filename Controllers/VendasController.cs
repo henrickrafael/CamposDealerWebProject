@@ -70,5 +70,16 @@ namespace CamposDealerWebProject.Controllers
 
             return Json(ModelState);
         }
+
+        [HttpDelete]
+        public async Task<JsonResult> DeleteSaleById(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                await _vendaRepository.DeleteSaleById(id);
+            }
+
+            return Json(ModelState);
+        }
     }
 }
