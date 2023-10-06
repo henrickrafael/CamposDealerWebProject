@@ -10,16 +10,16 @@ $("#inserirVenda").click(function () {
     resetTituloModal("saleModalOperationLabel");
 });
 
-$("#clientModalOperation").on("hidden.bs.modal", function () {
-    $(".reset-fields").click();
+$("#clientModalOperation").on("hidden.bs.modal", () => {
+    resetAll();
 });
 
-$("#productModalOperation").on("hidden.bs.modal", function () {
-    $(".reset-fields").click();
+$("#productModalOperation").on("hidden.bs.modal", () => {
+    resetAll();
 });
 
-$("#saleModalOperation").on("hidden.bs.modal", function () {
-    $(".reset-fields").click();
+$("#saleModalOperation").on("hidden.bs.modal", () => {
+    resetAll();
 });
 
 function resetAll() {
@@ -94,13 +94,13 @@ function setDropDownValue(element) {
     $(`#${element.id}`).val(element.value);   
 }
 
-$("#inserirVendaModal").click(function () {
+function inserirDadosVenda() {
     var saleId = $('#sale-id').val();
 
     var venda = {
         qtdVenda: $('#sale-qtd').val(),
         dthVenda: now(),
-        vlrTotalVenda: $('#total-value').val(),
+        vlrTotalVenda: $('#total-value').val().replace(".", ","),
         produtoId: $('#product-id').val(),
         clienteId: $('#client-id').val()
     }
@@ -111,7 +111,8 @@ $("#inserirVendaModal").click(function () {
         venda.idVenda = saleId;
         atualizarDadosVenda(venda);
     }
-});
+
+};
 
 function atualizarDadosVenda(dadosVenda) {
     $.ajax({
@@ -120,13 +121,14 @@ function atualizarDadosVenda(dadosVenda) {
         data: {
             venda: dadosVenda
         },
-        success: () => {
-            $("#nav-sale-view").load("/Vendas");
+        success: () => {            
             getUpdatedViewModel();
-
             alert("Venda atualizada com sucesso!");
         }
     });
+
+    esconderModal();
+    resetAll();
 }
 
 
@@ -280,8 +282,8 @@ function atualizarViewModelVendas(modelData) {
     var model = JSON.stringify(modelData);
     var modelEncoded = window.btoa(model); 
 
+    $("#sale-modal-wrapper").load(`/Vendas/GetUpdatedSaleIndex?model=${modelEncoded}`);
     $("#nav-sales-view").load("/Vendas");
-    $("#sale-modal-wrapper").load(`/Vendas/GetUpdatedSaleIndex?model=${modelEncoded}`);   
 }
 
 function getUpdatedViewModel() {    
@@ -289,7 +291,7 @@ function getUpdatedViewModel() {
         url: "/Home/GetViewModel",
         dataType: "json",
         timeout: 1000,
-        success: function (data) {
+        success: (data) => {
             atualizarViewModelVendas(data);
         }
     })
