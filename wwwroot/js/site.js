@@ -399,5 +399,3 @@ function setTotalValue(vlr, qtd) {
     let total = vlr * qtd;
     $("#total-value").val(total.toFixed(2));    
 }
-
-//TODO: aplicar sweet alert eventualmente

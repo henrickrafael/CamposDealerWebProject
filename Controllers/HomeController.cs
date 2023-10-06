@@ -9,10 +9,7 @@ using System.Diagnostics;
 namespace CamposDealerWebProject.Controllers
 {
     public class HomeController : Controller
-    {
-        /*TODO: Avaliar a atualização dinâmica dos inputs="select" ou dropdonwlist, uma vez que pour utilizar os valores recebidos da model 
-         * não atualiza em tempo real ao adicionar um novo produto ou cliente, por exemplo*/
-
+    {        
         private readonly IProdutoRepository _produtoRepository;
 
         private readonly IClienteRepository _clienteRepository;        
@@ -49,5 +46,10 @@ namespace CamposDealerWebProject.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        //TODO: Identificado um bug que ao selecionar um último item da lista e depois na opção de inserir, ele está atualizando o último item selecionado ao invés de inlcuir um novo, devem ser verificado os 3 crud's        
+        //TODO: Faltam ainda as opções de pesquisa para cada um dos 3. A venda tem duas opções de pesquisa.
+        //TODO: Criação de método para realização de carga de dados via API.
+        //TODO: aplicar sweet alert eventualmente
     }
 }
