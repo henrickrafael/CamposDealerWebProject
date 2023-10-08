@@ -25,9 +25,9 @@ namespace CamposDealerWebProject.Controllers
         
         public IActionResult Index()
         {            
-            return View(new ClienteProdutoViewModel { clientes = _clienteRepository.GetAllClientsResult(), 
-                                                      produtos = _produtoRepository.GetAllProductsResult(),
-                                                      vendas = _vendaRepository.GetAllVendasResult()});
+            return View(new ClienteProdutoViewModel { Clientes = _clienteRepository.GetAllClientsResult(), 
+                                                      Produtos = _produtoRepository.GetAllProductsResult(),
+                                                      Vendas = _vendaRepository.GetAllVendasResult()});
         }
 
         [HttpGet]
@@ -35,9 +35,9 @@ namespace CamposDealerWebProject.Controllers
         {
             return Task.FromResult(Json(new ClienteProdutoViewModel
             {
-                clientes = _clienteRepository.GetAllClientsResult(),
-                produtos = _produtoRepository.GetAllProductsResult(),
-                vendas = _vendaRepository.GetAllVendasResult()
+                Clientes = _clienteRepository.GetAllClientsResult(),
+                Produtos = _produtoRepository.GetAllProductsResult(),
+                Vendas = _vendaRepository.GetAllVendasResult()
             }));
         }
 

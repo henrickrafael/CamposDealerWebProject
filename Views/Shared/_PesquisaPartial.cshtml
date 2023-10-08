@@ -2,13 +2,20 @@
 
 @{
     var nomeMetodoJs = string.Concat("retornarConsulta", Model, "()");
+    var placeHolder = Model.Equals("Clientes") ? "Nome do cliente" : "Descrição do produto";    
 }
 
 <button class="btn btn-primary mt-2 d-inline" data-bs-toggle="collapse" href="#collapse-@Model" aria-expanded="false" aria-controls="collapse-@Model">
     Pesquisar
 </button>
 <div class="collapse mt-2" id="collapse-@Model">
-    <div class="card card-body">        
-        <a href="#" onclick="@nomeMetodoJs">Campo</a>
+    <div class="input-group">
+        <input type="search" class="form-control" placeholder="@placeHolder">
+        <button class="btn btn-outline-primary" type="button">
+            <img class="icon-prop" src="~/images/search_strong_icon.png" />
+        </button>
+        <button class="btn btn-outline-danger" type="button">
+            <img class="icon-prop" src="~/images/close_icon.png" />
+        </button>
     </div>
 </div>

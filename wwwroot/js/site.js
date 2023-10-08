@@ -399,10 +399,10 @@ function setTotalValue(vlr, qtd) {
     $("#total-value").val(total.toFixed(2));    
 }
 
-function retornarConsultaclientes() {
+function retornarConsultaClientes() {
     console.log("somente para clientes");
 }
 
-function retornarConsultaprodutos() {
+function retornarConsultaProdutos() {
     console.log("somente para produtos");
 }

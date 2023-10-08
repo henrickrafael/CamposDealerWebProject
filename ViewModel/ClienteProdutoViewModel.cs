@@ -4,10 +4,10 @@ namespace CamposDealerWebProject.ViewModel
 {
     public class ClienteProdutoViewModel
     {
-        public List<Produto> produtos { get; set; }
+        public List<Produto> Produtos { get; set; }
 
-        public List<Cliente> clientes { get; set; }
+        public List<Cliente> Clientes { get; set; }
 
-        public List<Venda> vendas { get; set; }
+        public List<Venda> Vendas { get; set; }
     }
 }

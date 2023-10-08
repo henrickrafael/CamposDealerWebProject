@@ -16,28 +16,28 @@
         <div class="tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">
             <div class="container mt-3 p-2">
                 <button type="button" class="btn btn-success mt-2 d-inline" data-bs-toggle="modal" data-bs-target="#clientModalOperation" id="inserirCliente">Inserir cliente</button>               
-                <partial name="_PesquisaPartial" model="@nameof(Model.clientes)" />
+                <partial name="_PesquisaPartial" model="@nameof(Model.Clientes)" />
             </div>
             <div id="nav-client-view">
-                <partial name="/Views/Clientes/_ClientesPartial.cshtml" model="@Model.clientes"/>
+                <partial name="/Views/Clientes/_ClientesPartial.cshtml" model="@Model.Clientes"/>
             </div>
         </div><!--nav-client-->        
         <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
             <div class="container mt-3 p-2">
                 <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#productModalOperation" id="inserirProduto">Inserir produto</button>
-                <partial name="_PesquisaPartial" model="@nameof(Model.produtos)" />
+                <partial name="_PesquisaPartial" model="@nameof(Model.Produtos)" />
             </div>
             <div id="nav-product-view">
-                <partial name="/Views/Produtos/_ProdutosPartial.cshtml" model="@Model.produtos" />
+                <partial name="/Views/Produtos/_ProdutosPartial.cshtml" model="@Model.Produtos" />
             </div>
         </div><!--nav-product-->
         <div class="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-sales-tab">
             <div class="container mt-3 p-2">
                 <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#saleModalOperation" id="inserirVenda">Inserir venda</button>
-                <partial name="_PesquisaPartial" model="@nameof(Model.vendas)" />
+                <partial name="_PesquisaPartial" model="@nameof(Model.Vendas)" />
             </div>
             <div id="nav-sales-view">
-                 <partial name="/Views/Vendas/_VendasPartial.cshtml" model="@Model.vendas" />
+                 <partial name="/Views/Vendas/_VendasPartial.cshtml" model="@Model.Vendas" />
             </div>
         </div><!--nav-sales-->
     </div><!--nav-tabContent-->
