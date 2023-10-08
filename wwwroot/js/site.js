@@ -186,7 +186,7 @@ function removerVenda(id) {
 }
 
 function removerCliente(id) {
-    var confirmarExclusao = confirm("Tem certeza que deseja remover este cliente?");
+    var confirmarExclusao = confirm("Tem certeza que deseja remover este cliente? Todas as vendas vinculadas a este cliente também serão excluídas!");
 
     if (confirmarExclusao) { 
         $.ajax({
@@ -202,7 +202,7 @@ function removerCliente(id) {
 }
 
 function removerProduto(id) {
-    var confirmarExclusao = confirm("Tem certeza que deseja remover este produto?");
+    var confirmarExclusao = confirm("Tem certeza que deseja remover este produto? Todas as vendas vinculadas a este produto também serão excluídas!");
 
     if (confirmarExclusao) {
         $.ajax({
