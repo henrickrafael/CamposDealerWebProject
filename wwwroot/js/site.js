@@ -398,3 +398,11 @@ function setTotalValue(vlr, qtd) {
     let total = vlr * qtd;
     $("#total-value").val(total.toFixed(2));    
 }
+
+function retornarConsultaclientes() {
+    console.log("somente para clientes");
+}
+
+function retornarConsultaprodutos() {
+    console.log("somente para produtos");
+}
