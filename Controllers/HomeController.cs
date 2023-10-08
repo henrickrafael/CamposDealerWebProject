@@ -47,8 +47,13 @@ namespace CamposDealerWebProject.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         
-        //TODO: Faltam ainda as opções de pesquisa para cada um dos 3. A venda tem duas opções de pesquisa.
-        //TODO: Criação de método para realização de carga de dados via API.
-        //TODO: aplicar sweet alert eventualmente
+        //TODO 1: Faltam ainda as opções de pesquisa para cada um dos 3. A venda tem duas opções de pesquisa.
+            //TODO 1.1: Busca de cliente por nome do cliente (NOK)
+            //TODO 1.2: Busca de produto por descrição do produto (NOK)
+            //TODO 1.3: Busca de venda por nome do cliente (NOK)
+            //TODO 1.4: Busca de venda por descrição do produto (NOK)
+
+        //TODO 2: Criação de método para realização de carga de dados via API.
+        //TODO 3: aplicar sweet alert eventualmente
     }
 }
