@@ -13,7 +13,7 @@
                         <input type="text" hidden class="form-control" id="sale-id">
                         <div class="mb-3">
                             <label for="produtos" class="col-form-label">Produto</label>
-                            <select id="product-id" onchange="setDropDownValue(this)" class="form-select produtos" aria-label="Selecione">
+                            <select id="product-id" required onchange="setDropDownValue(this)" class="form-select produtos" aria-label="Selecione">
                                 <option value="" selected>Selecione</option>
                                 @foreach (var produto in Model.produtos)
                                 {
@@ -23,7 +23,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="clientes" class="col-form-label">Cliente</label>
-                            <select id="client-id" onchange="setDropDownValue(this)" class="form-select clientes" aria-label="Selecione">
+                            <select id="client-id" required onchange="setDropDownValue(this)" class="form-select clientes" aria-label="Selecione">
                                 <option value="" selected>Selecione</option>
                                 @foreach (var cliente in Model.clientes)
                                 {
@@ -33,7 +33,7 @@
                         </div>
                         <div mb="mb-3">
                             <label for="qtd" class="col-form-label">Quantidade</label>
-                            <input type="number" required onkeypress="return setOnlyNumbers(event, this, false)" onclick="setTotalValue($('#unity-value').val(), this.value)" min="0" class="form-control" id="sale-qtd">
+                            <input type="number" required onkeypress="return setOnlyNumbers(event, this, false)" onclick="setTotalValue($('#unity-value').val(), this.value)" min="1" class="form-control" id="sale-qtd">
                         </div>
                         <div class="mb-3">
                             <label for="text" class="col-form-label">Valor unitário</label>                       

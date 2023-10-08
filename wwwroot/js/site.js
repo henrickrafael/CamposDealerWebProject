@@ -86,10 +86,6 @@ function setOnlyNumbers(event, valueInput, useDot) {
     return true;
 }
 
-function setDefaultValue(prop) {
-    prop.value = 0;
-}
-
 function setDropDownValue(element) {
     $(`#${element.id}`).val(element.value);       
 }
@@ -391,6 +387,9 @@ function esconderModal() {
 }
 
 function setValorUnitario(vlr) {
+    const valueDefault = 1
+    $("#sale-qtd").val(valueDefault);
+
     $("#unity-value").val(vlr);    
     setTotalValue(vlr, $("#sale-qtd").val());    
 }
