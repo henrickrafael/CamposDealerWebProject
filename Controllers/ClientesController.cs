@@ -31,12 +31,7 @@ namespace CamposDealerWebProject.Controllers
             }                       
 
             var clienteEncoded = Convert.FromBase64String(cliente);
-            var clienteDecoded = System.Text.Encoding.UTF8.GetString(clienteEncoded);
-
-            if (string.IsNullOrWhiteSpace(clienteDecoded))
-            {
-                var meuPau = "aeo";
-            }
+            var clienteDecoded = System.Text.Encoding.UTF8.GetString(clienteEncoded);            
 
             var clienteResult = JsonConvert.DeserializeObject<Cliente>(clienteDecoded);
 
