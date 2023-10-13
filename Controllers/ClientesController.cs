@@ -31,11 +31,24 @@ namespace CamposDealerWebProject.Controllers
             }                       
 
             var clienteEncoded = Convert.FromBase64String(cliente);
-            var clienteDecoded = System.Text.Encoding.UTF8.GetString(clienteEncoded);            
+            var clienteDecoded = System.Text.Encoding.UTF8.GetString(clienteEncoded);
+            Cliente clienteResult;
 
-            var clienteResult = JsonConvert.DeserializeObject<Cliente>(clienteDecoded);
+            try
+            {
+                clienteResult = JsonConvert.DeserializeObject<Cliente>(clienteDecoded);
+            }
+            catch (Exception)
+            {
+                return PartialView("../Clientes/_ClientesPartial", await _clienteRepository.GetAllClients());
+            }
 
-            return PartialView("../Clientes/_ClientesPartial", new List<Cliente> { clienteResult });
+            if (clienteResult != null)
+            {
+                return PartialView("../Clientes/_ClientesPartial", new List<Cliente> { clienteResult });
+            }
+
+            return PartialView("../Clientes/_ClientesPartial", await _clienteRepository.GetAllClients());
         }
 
         [HttpPost]

@@ -400,8 +400,7 @@ function setTotalValue(vlr, qtd) {
 }
 
 function retornarConsultaClientes() {    
-    nmCliente = $("#search-parameter").val();
-    console.log(nmCliente);
+    nmCliente = $("#search-parameter").val();       
 
     $.ajax({
         url: `Clientes/GetClientByName`,
