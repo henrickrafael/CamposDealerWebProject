@@ -54,12 +54,17 @@ namespace CamposDealerWebProject.Repositories
                         .SingleOrDefaultAsync(c => c.IdCliente.Equals(idCliente));
         }
 
-        public IEnumerable<Cliente> GetClientByName(string nmCliente)
+        public async Task<Cliente> GetClientByName(string nmCliente)
         {
-            if(!string.IsNullOrWhiteSpace(nmCliente))
-               return _context.Clientes.Where(cliente => cliente.NmCliente.Equals(nmCliente, StringComparison.InvariantCultureIgnoreCase));
+            if (!string.IsNullOrWhiteSpace(nmCliente))
+            {
+                var cliente = await _context.Clientes
+                                    .SingleOrDefaultAsync(c => c.NmCliente.ToLower().Equals(nmCliente.ToLower()));
 
-            return _context.Clientes.OrderBy(cliente => cliente.IdCliente);
+                return cliente;
+            }
+            
+            return null;
         }
 
         public async Task UpdateClientById(Cliente cliente)

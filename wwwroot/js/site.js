@@ -399,8 +399,21 @@ function setTotalValue(vlr, qtd) {
     $("#total-value").val(total.toFixed(2));    
 }
 
-function retornarConsultaClientes() {
-    console.log("somente para clientes");
+function retornarConsultaClientes() {    
+    nmCliente = $("#search-parameter").val();
+    console.log(nmCliente);
+
+    $.ajax({
+        url: `Clientes/GetClientByName`,
+        method: "GET",
+        timeout: 10000,
+        data: { nmCliente },
+        success: (data) => {
+            let json = JSON.stringify(data);
+            let cliente = window.btoa(json);
+            $("#nav-client-view").load(`/Clientes/Index?cliente=${cliente}`);
+        }
+    })    
 }
 
 function retornarConsultaProdutos() {

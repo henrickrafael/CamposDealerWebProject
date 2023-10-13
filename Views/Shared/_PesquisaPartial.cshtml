@@ -14,7 +14,7 @@
 </button>
 <div class="collapse mt-2" id="collapse-@Model">
     <div class="input-group">
-        <input type="search" class="form-control" placeholder="@placeHolder">
+        <input type="search" id="search-parameter" class="form-control" placeholder="@placeHolder">
         @if (isTipoVenda)
         {
             <select class="form-select form-select-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -23,7 +23,7 @@
                 <option value="@TipoModel.Produtos" class="dropdown-item">Descrição do produto</option>
             </select>
         }
-        <button class="btn btn-outline-primary" type="button">
+        <button onclick="@nomeMetodoJs" class="btn btn-outline-primary" type="button">
             <img class="icon-prop" src="~/images/search_strong_icon.png" />
         </button>
         <button class="btn btn-outline-danger" type="button">

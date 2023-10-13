@@ -8,6 +8,7 @@ using CamposDealerWebProject.Context;
 using CamposDealerWebProject.Models;
 using CamposDealerWebProject.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json;
 
 namespace CamposDealerWebProject.Controllers
 {
@@ -19,10 +20,27 @@ namespace CamposDealerWebProject.Controllers
         {
             _clienteRepository = cliente;
         }
-        
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string cliente)
         {
-            return PartialView("../Clientes/_ClientesPartial", await _clienteRepository.GetAllClients());
+            ModelState.Clear();
+
+            if (string.IsNullOrWhiteSpace(cliente))
+            {
+                return PartialView("../Clientes/_ClientesPartial", await _clienteRepository.GetAllClients());
+            }                       
+
+            var clienteEncoded = Convert.FromBase64String(cliente);
+            var clienteDecoded = System.Text.Encoding.UTF8.GetString(clienteEncoded);
+
+            if (string.IsNullOrWhiteSpace(clienteDecoded))
+            {
+                var meuPau = "aeo";
+            }
+
+            var clienteResult = JsonConvert.DeserializeObject<Cliente>(clienteDecoded);
+
+            return PartialView("../Clientes/_ClientesPartial", new List<Cliente> { clienteResult });
         }
 
         [HttpPost]
@@ -54,6 +72,18 @@ namespace CamposDealerWebProject.Controllers
             if (ModelState.IsValid)
             {
                 var cliente = await _clienteRepository.GetClientById(id);
+                return Json(cliente);
+            }
+
+            return Json(ModelState);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetClientByName(string nmCliente)
+        {
+            if (ModelState.IsValid && !string.IsNullOrWhiteSpace(nmCliente))
+            {
+                var cliente = await _clienteRepository.GetClientByName(nmCliente);
                 return Json(cliente);
             }
 
