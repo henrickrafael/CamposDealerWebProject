@@ -23,32 +23,29 @@ namespace CamposDealerWebProject.Controllers
 
         public async Task<IActionResult> Index(string cliente)
         {
-            ModelState.Clear();
-
-            if (string.IsNullOrWhiteSpace(cliente))
-            {
-                return PartialView("../Clientes/_ClientesPartial", await _clienteRepository.GetAllClients());
-            }                       
-
-            var clienteEncoded = Convert.FromBase64String(cliente);
-            var clienteDecoded = System.Text.Encoding.UTF8.GetString(clienteEncoded);
-            Cliente clienteResult;
-
             try
             {
+                ModelState.Clear();
+              
+                var clienteEncoded = Convert.FromBase64String(cliente);
+                var clienteDecoded = System.Text.Encoding.UTF8.GetString(clienteEncoded);
+                Cliente clienteResult;
+
                 clienteResult = JsonConvert.DeserializeObject<Cliente>(clienteDecoded);
+
+                if (clienteResult == null)
+                {
+                    return PartialView("_ConsultaNaoLocalizada");
+                }
+
+                return PartialView("../Clientes/_ClientesPartial", new List<Cliente> { clienteResult });
             }
+
             catch (Exception)
             {
                 return PartialView("../Clientes/_ClientesPartial", await _clienteRepository.GetAllClients());
             }
-
-            if (clienteResult != null)
-            {
-                return PartialView("../Clientes/_ClientesPartial", new List<Cliente> { clienteResult });
-            }
-
-            return PartialView("../Clientes/_ClientesPartial", await _clienteRepository.GetAllClients());
+                        
         }
 
         [HttpPost]

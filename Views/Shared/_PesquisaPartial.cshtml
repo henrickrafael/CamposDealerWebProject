@@ -13,21 +13,24 @@
     Pesquisar
 </button>
 <div class="collapse mt-2" id="collapse-@Model">
-    <div class="input-group">
-        <input type="search" id="search-parameter" class="form-control" placeholder="@placeHolder">
-        @if (isTipoVenda)
-        {
-            <select class="form-select form-select-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <option value="" selected>Selecione</option>
-                <option value="@TipoModel.Clientes" class="dropdown-item">Nome do cliente</option>
-                <option value="@TipoModel.Produtos" class="dropdown-item">Descrição do produto</option>
-            </select>
-        }
-        <button onclick="@nomeMetodoJs" class="btn btn-outline-primary" type="button">
-            <img class="icon-prop" src="~/images/search_strong_icon.png" />
-        </button>
-        <button class="btn btn-outline-danger" type="button">
-            <img class="icon-prop" src="~/images/close_icon.png" />
-        </button>
-    </div>
+    <form>
+        <div class="input-group">
+            <input type="search" id="search-parameter" class="form-control" placeholder="@placeHolder">
+            @if (isTipoVenda)
+            {
+                <select class="form-select form-select-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <option value="" selected>Selecione</option>
+                    <option value="@TipoModel.Clientes" class="dropdown-item">Nome do cliente</option>
+                    <option value="@TipoModel.Produtos" class="dropdown-item">Descrição do produto</option>
+                </select>
+            }
+            <button onclick="@nomeMetodoJs" class="btn btn-outline-primary" type="button">
+                <img class="icon-prop" src="~/images/search_strong_icon.png" />
+            </button>
+            <button onclick="resetAll()" class="btn btn-outline-danger" type="button">
+                <img class="icon-prop" src="~/images/close_icon.png" />
+            </button>
+        </div>
+        <input type="reset" hidden class="btn btn-primary reset-fields">
+    </form>
 </div>

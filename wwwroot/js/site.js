@@ -399,6 +399,13 @@ function setTotalValue(vlr, qtd) {
     $("#total-value").val(total.toFixed(2));    
 }
 
+function retornarDadosBase64(dados) {
+    let json = JSON.stringify(dados);
+    let jsonBase64 = window.btoa(json);
+
+    return jsonBase64;
+}
+
 function retornarConsultaClientes() {    
     nmCliente = $("#search-parameter").val();       
 
@@ -407,9 +414,8 @@ function retornarConsultaClientes() {
         method: "GET",
         timeout: 10000,
         data: { nmCliente },
-        success: (data) => {
-            let json = JSON.stringify(data);
-            let cliente = window.btoa(json);
+        success: (data) => {            
+            let cliente = retornarDadosBase64(data);
             $("#nav-client-view").load(`/Clientes/Index?cliente=${cliente}`);
         }
     })    
