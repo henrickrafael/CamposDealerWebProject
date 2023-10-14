@@ -28,10 +28,8 @@ namespace CamposDealerWebProject.Controllers
                 ModelState.Clear();
               
                 var clienteEncoded = Convert.FromBase64String(cliente);
-                var clienteDecoded = System.Text.Encoding.UTF8.GetString(clienteEncoded);
-                Cliente clienteResult;
-
-                clienteResult = JsonConvert.DeserializeObject<Cliente>(clienteDecoded);
+                var clienteDecoded = System.Text.Encoding.UTF8.GetString(clienteEncoded);                
+                var clienteResult = JsonConvert.DeserializeObject<Cliente>(clienteDecoded);
 
                 if (clienteResult == null)
                 {

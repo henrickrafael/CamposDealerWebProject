@@ -25,10 +25,8 @@ namespace CamposDealerWebProject.Controllers
                 ModelState.Clear();
 
                 var produtoEncoded = Convert.FromBase64String(produto);
-                var produtoDecoded = System.Text.Encoding.UTF8.GetString(produtoEncoded);
-                Produto produtoResult;
-
-                produtoResult = JsonConvert.DeserializeObject<Produto>(produtoDecoded);
+                var produtoDecoded = System.Text.Encoding.UTF8.GetString(produtoEncoded);                
+                var produtoResult = JsonConvert.DeserializeObject<Produto>(produtoDecoded);
 
                 if (produtoResult == null)
                 {
