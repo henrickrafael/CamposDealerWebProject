@@ -17,15 +17,15 @@ namespace CamposDealerWebProject.Repositories
                                                     .Include(venda => venda.Cliente)
                                                     .Include(venda => venda.Produto);
 
-        public async Task<Venda> GetVendaByDscProduto(string dscProduto)
+        public async Task<List<Venda>> GetVendaByDscProduto(string dscProduto)
         {
             if (!string.IsNullOrWhiteSpace(dscProduto))
             {
                 var venda = await _context.Vendas
                                     .Include(c => c.Cliente)
                                     .Include(c => c.Produto)
-                                    .SingleOrDefaultAsync(c => c.Produto.DscProduto.ToLower().Equals(dscProduto.ToLower())
-                );
+                                    .Where(c => c.Produto.DscProduto.ToLower().Equals(dscProduto.ToLower())
+                ).ToListAsync();
 
                 return venda;
             }
@@ -78,15 +78,15 @@ namespace CamposDealerWebProject.Repositories
             }
         }
 
-        public async Task<Venda> GetVendaByNomeCliente(string nmCliente)
+        public async Task<List<Venda>> GetVendaByNomeCliente(string nmCliente)
         {
             if (!string.IsNullOrWhiteSpace(nmCliente))
             {
                var venda = await _context.Vendas
                                .Include(c => c.Cliente)
                                .Include(c => c.Produto)
-                               .SingleOrDefaultAsync(c => c.Cliente.NmCliente.ToLower().Equals(nmCliente.ToLower())
-                );
+                               .Where(c => c.Cliente.NmCliente.ToLower().Equals(nmCliente.ToLower())
+                ).ToListAsync();
 
                 return venda;
             }

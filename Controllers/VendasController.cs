@@ -26,9 +26,28 @@ namespace CamposDealerWebProject.Controllers
             _produtoRepository = produtoRepository;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string venda)
         {
-            return PartialView("../Vendas/_VendasPartial", await _vendaRepository.GetAllVendas());
+            try
+            {
+                ModelState.Clear();
+
+                var vendaEncoded = Convert.FromBase64String(venda);
+                var vendaDecoded = System.Text.Encoding.UTF8.GetString(vendaEncoded);                
+                var vendaResult = JsonConvert.DeserializeObject<List<Venda>>(vendaDecoded);
+
+                if (vendaResult == null)
+                {
+                    return PartialView("_ConsultaNaoLocalizada");
+                }
+
+                return PartialView("../Vendas/_VendasPartial", vendaResult);
+            }
+
+            catch (Exception)
+            {
+                return PartialView("../Vendas/_VendasPartial", await _vendaRepository.GetAllVendas());
+            }            
         }
 
         [HttpGet]
@@ -91,10 +110,20 @@ namespace CamposDealerWebProject.Controllers
         {
             if (ModelState.IsValid && !string.IsNullOrWhiteSpace(param))
             {
-                var paramResult = JObject.Parse(param.ToJson());
-                var teste = paramResult.SelectToken("tipoModel");
+                var paramResult = JObject.Parse(param);
+                var tipoModel = paramResult.SelectToken("tipoModel").ToString();
 
-                return Json(param);
+                if (tipoModel.Equals(nameof(TipoModel.Clientes)))
+                {
+                   var venda = await _vendaRepository.GetVendaByNomeCliente(paramResult.SelectToken("valorConsulta").ToString());
+                   return Json(venda);
+                }
+
+                if (tipoModel.Equals(nameof(TipoModel.Produtos)))
+                {
+                    var venda = await _vendaRepository.GetVendaByDscProduto(paramResult.SelectToken("valorConsulta").ToString());
+                    return Json(venda);
+                }
             }
 
             return Json(ModelState);
