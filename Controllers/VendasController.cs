@@ -1,10 +1,14 @@
 ﻿using CamposDealerWebProject.Context;
+using CamposDealerWebProject.Enums;
 using CamposDealerWebProject.Models;
 using CamposDealerWebProject.Repositories;
 using CamposDealerWebProject.Repositories.Interfaces;
 using CamposDealerWebProject.ViewModel;
+using MessagePack.Formatters;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using NuGet.Protocol;
 using System.Diagnostics;
 
 namespace CamposDealerWebProject.Controllers
@@ -77,6 +81,20 @@ namespace CamposDealerWebProject.Controllers
             if (ModelState.IsValid)
             {
                 await _vendaRepository.DeleteSaleById(id);
+            }
+
+            return Json(ModelState);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetSaleByParameter(string param)
+        {
+            if (ModelState.IsValid && !string.IsNullOrWhiteSpace(param))
+            {
+                var paramResult = JObject.Parse(param.ToJson());
+                var teste = paramResult.SelectToken("tipoModel");
+
+                return Json(param);
             }
 
             return Json(ModelState);

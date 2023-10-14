@@ -37,8 +37,8 @@ namespace CamposDealerWebProject.Repositories
             {
 
                 var produto = await _context.Produtos
-                               .SingleOrDefaultAsync(p => p.DscProduto.ToLower().Equals(dscProduto.ToLower()
-                ));
+                               .SingleOrDefaultAsync(p => p.DscProduto.ToLower().Equals(dscProduto.ToLower())
+                );
 
                 return produto;
             }

@@ -18,10 +18,10 @@
             <input type="search" id="search-parameter-@Model" class="form-control" placeholder="@placeHolder">
             @if (isTipoVenda)
             {
-                <select class="form-select form-select-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <select id="tipo-consulta-ddl" onchange="setDropDownValue(this)" class="form-select form-select-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <option value="" selected>Selecione</option>
-                    <option value="@TipoModel.Clientes" class="dropdown-item">Nome do cliente</option>
-                    <option value="@TipoModel.Produtos" class="dropdown-item">Descrição do produto</option>
+                    <option value="@TipoModel.Clientes.GetHashCode()" class="form-select">Nome do cliente</option>
+                    <option value="@TipoModel.Produtos.GetHashCode()" class="form-select">Descrição do produto</option>
                 </select>
             }
             <button onclick="@nomeMetodoJs" class="btn btn-outline-primary" type="button">

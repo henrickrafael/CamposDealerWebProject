@@ -17,15 +17,20 @@ namespace CamposDealerWebProject.Repositories
                                                     .Include(venda => venda.Cliente)
                                                     .Include(venda => venda.Produto);
 
-        public IEnumerable<Venda> GetVendaByDscProduto(string dscProduto)
+        public async Task<Venda> GetVendaByDscProduto(string dscProduto)
         {
             if (!string.IsNullOrWhiteSpace(dscProduto))
-                return _context.Vendas.Include(venda => venda.Cliente)
-                                      .Include(venda => venda.Produto)
-                                      .Where(venda => venda.Produto.DscProduto.ToLower().Equals(dscProduto.ToLower()));
+            {
+                var venda = await _context.Vendas
+                                    .Include(c => c.Cliente)
+                                    .Include(c => c.Produto)
+                                    .SingleOrDefaultAsync(c => c.Produto.DscProduto.ToLower().Equals(dscProduto.ToLower())
+                );
 
-            return _context.Vendas.Include(venda => venda.Cliente)
-                                  .Include(venda => venda.Produto).OrderBy(venda => venda.IdVenda);
+                return venda;
+            }
+
+            return null;
         }
 
         public async Task<List<Venda>> GetAllVendas() 
@@ -73,15 +78,20 @@ namespace CamposDealerWebProject.Repositories
             }
         }
 
-        public IEnumerable<Venda> GetVendaByNomeCliente(string nmCliente)
+        public async Task<Venda> GetVendaByNomeCliente(string nmCliente)
         {
             if (!string.IsNullOrWhiteSpace(nmCliente))
-                return _context.Vendas.Include(venda => venda.Cliente)
-                                      .Include(venda => venda.Produto)
-                                      .Where(venda => venda.Cliente.NmCliente.ToLower().Equals(nmCliente.ToLower()));
+            {
+               var venda = await _context.Vendas
+                               .Include(c => c.Cliente)
+                               .Include(c => c.Produto)
+                               .SingleOrDefaultAsync(c => c.Cliente.NmCliente.ToLower().Equals(nmCliente.ToLower())
+                );
 
-            return _context.Vendas.Include(venda => venda.Cliente)
-                                  .Include(venda => venda.Produto).OrderBy(venda => venda.IdVenda);
+                return venda;
+            }
+
+            return null;
         }
 
         public async Task DeleteSaleById(int id)

@@ -435,3 +435,25 @@ function retornarConsultaProdutos() {
         }
     })
 }
+
+function retornarConsultaVendas() {
+    textoConsulta = $("#search-parameter-Vendas").val();
+
+    var obj = {
+        tipoModel: $("#tipo-consulta-ddl").val(),
+        valorConsulta: textoConsulta
+    }
+
+    var param = JSON.stringify(obj)  
+
+    $.ajax({
+        url: `Vendas/GetSaleByParameter`,
+        method: "GET",
+        timeout: 10000,
+        data: { param },
+        success: (data) => {
+            let venda = retornarDadosBase64(data);
+            $("#nav-sales-view").load(`/Vendas/Index?venda=${venda}`);
+        }
+    })
+}
