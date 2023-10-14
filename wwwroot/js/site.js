@@ -407,7 +407,7 @@ function retornarDadosBase64(dados) {
 }
 
 function retornarConsultaClientes() {    
-    nmCliente = $("#search-parameter").val();       
+    nmCliente = $("#search-parameter-Clientes").val();       
 
     $.ajax({
         url: `Clientes/GetClientByName`,
@@ -422,5 +422,16 @@ function retornarConsultaClientes() {
 }
 
 function retornarConsultaProdutos() {
-    console.log("somente para produtos");
+    dscProduto = $("#search-parameter-Produtos").val();
+
+    $.ajax({
+        url: `Produtos/GetProductByDescription`,
+        method: "GET",
+        timeout: 10000,
+        data: { dscProduto },
+        success: (data) => {
+            let produto = retornarDadosBase64(data);
+            $("#nav-product-view").load(`/Produtos/Index?produto=${produto}`);
+        }
+    })
 }
