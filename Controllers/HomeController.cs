@@ -47,8 +47,8 @@ namespace CamposDealerWebProject.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        //TODO 1 [Obrigatorio]: Criação de método para realização de carga de dados via API.
-        //TODO 2 [Melhoria]: Mudar metodos de consulta anteriores para retornarem listas e consultas para usarem um contains (para retornar mais de um resultado)        
+        //TODO 1 [Obrigatorio]: Criação de método para realização de carga de dados via API.        
+        //TODO 2 [Melhoria]: Criar um método genérico para tratar os retornos de texto dos outros 3 controlers. (Remover código triplicado)    
         //TODO 3 [Melhoria]: aplicar sweet alert eventualmente
         //TODO 4 [Melhoria]: realizar validação de campos com javascript
     }
