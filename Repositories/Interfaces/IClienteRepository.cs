@@ -7,7 +7,7 @@ namespace CamposDealerWebProject.Repositories.Interfaces
     {
         IEnumerable<Cliente> Clientes { get; }
 
-        public Task<Cliente> GetClientByName(string nmCliente);
+        public Task<List<Cliente>> GetClientByName(string nmCliente);
 
         public Task AddClient(Cliente cliente);
 

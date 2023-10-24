@@ -31,14 +31,15 @@ namespace CamposDealerWebProject.Repositories
             return produtos;
         }
 
-        public async Task<Produto> GetProductByDescription(string dscProduto)
+        public async Task<List<Produto>> GetProductByDescription(string dscProduto)
         {
             if (!string.IsNullOrWhiteSpace(dscProduto))
             {
 
                 var produto = await _context.Produtos
-                               .SingleOrDefaultAsync(p => p.DscProduto.ToLower().Equals(dscProduto.ToLower())
-                );
+                                            .Where(p => p.DscProduto.ToLower()
+                                            .Contains(dscProduto.ToLower())
+                ).ToListAsync();
 
                 return produto;
             }

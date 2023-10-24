@@ -26,14 +26,14 @@ namespace CamposDealerWebProject.Controllers
 
                 var produtoEncoded = Convert.FromBase64String(produto);
                 var produtoDecoded = System.Text.Encoding.UTF8.GetString(produtoEncoded);                
-                var produtoResult = JsonConvert.DeserializeObject<Produto>(produtoDecoded);
+                var produtoResult = JsonConvert.DeserializeObject<List<Produto>>(produtoDecoded);
 
                 if (produtoResult == null)
                 {
                     return PartialView("_ConsultaNaoLocalizada");
                 }
 
-                return PartialView("../Produtos/_ProdutosPartial", new List<Produto> { produtoResult });
+                return PartialView("../Produtos/_ProdutosPartial", produtoResult);
             }
             catch (Exception)
             {

@@ -54,12 +54,14 @@ namespace CamposDealerWebProject.Repositories
                         .SingleOrDefaultAsync(c => c.IdCliente.Equals(idCliente));
         }
 
-        public async Task<Cliente> GetClientByName(string nmCliente)
+        public async Task<List<Cliente>> GetClientByName(string nmCliente)
         {
             if (!string.IsNullOrWhiteSpace(nmCliente))
             {
                 var cliente = await _context.Clientes
-                                    .SingleOrDefaultAsync(c => c.NmCliente.ToLower().Equals(nmCliente.ToLower()));
+                                    .Where(c => c.NmCliente.ToLower()
+                                    .Contains(nmCliente.ToLower())
+            ).ToListAsync();
 
                 return cliente;
             }
