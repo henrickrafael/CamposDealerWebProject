@@ -1,10 +1,11 @@
 ﻿@model string
 
 @{
-    bool isTipoVenda = !Model.Equals(TipoModel.Clientes.ToString()) && !Model.Equals(TipoModel.Produtos.ToString());
+    bool isTipoVenda = !Model.Equals(Enum.GetName<TipoModel>(TipoModel.Clientes)) 
+                    && !Model.Equals(Enum.GetName<TipoModel>(TipoModel.Produtos));
 
     string nomeMetodoJs = string.Concat("retornarConsulta", Model, "()");
-    string placeHolder = Model.Equals(TipoModel.Clientes.ToString()) ? "Nome do cliente" : "Descrição do produto";
+    string placeHolder = Model.Equals(Enum.GetName<TipoModel>(TipoModel.Clientes)) ? "Nome do cliente" : "Descrição do produto";
     
     placeHolder = isTipoVenda ? "Consultar venda por:" : placeHolder;
 }
