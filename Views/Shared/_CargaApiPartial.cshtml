@@ -1,23 +1,14 @@
 ﻿@model string
+@using CamposDealerWebProject.Api.Helpers
+@using CamposDealerWebProject.Api
+
 
 @{
 
     var modelName = Enum.GetNames(typeof(TipoModel))
                         .Where(t => t.Equals(Model))
                         .SingleOrDefault();
-
-    using var httpClient = new HttpClient();
-    string httpClientBaseAdress = modelName.Remove(modelName.Length - 1, 1);
-    httpClient.BaseAddress = new Uri("https://camposdealer.dev/Sites/TesteAPI/");
-    httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));    
-
-    var httpResponse = httpClient.GetAsync(httpClientBaseAdress).Result;
-    string responseResult = string.Empty;
-
-    if (httpResponse.IsSuccessStatusCode)
-    {
-        //responseResult = Newtonsoft.Json.JsonConvert<>
-    }
+    
 }
 
 <button class="btn btn-outline-primary mt-2 d-inline float-end">
