@@ -10,13 +10,12 @@
             
             return httpClient;
         }
-
+      
         public static string GetUrlFromConfigurationFile(string key)
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: false);
             IConfiguration configuration = builder.Build();
-
-            //Exemplo de como passar a key via parâmetro: "UrlAPi:CamposDealerBaseUrl"
+         
             return configuration.GetValue<string>(key);
         }
     }
