@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NuGet.Protocol;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
@@ -34,7 +36,6 @@ namespace CamposDealerWebProject.Controllers
         
         public IActionResult Index()
         {            
-            TestarTipo();
             return View(new ClienteProdutoViewModel { Clientes = _clienteRepository.GetAllClientsResult(), 
                                                       Produtos = _produtoRepository.GetAllProductsResult(),
                                                       Vendas = _vendaRepository.GetAllVendasResult()});           
@@ -74,16 +75,11 @@ namespace CamposDealerWebProject.Controllers
             return classType;
         }
 
-        public async void TestarTipo() 
+        public async void TestarTipo(TipoModel model) 
         {
-
-            var endPoint = "Cliente";
             Api.ApiClient api = new();
-            var apiResponse = await api.GetData<Cliente>(nameof(Cliente), ApiClassHelper.GetHttpClient(
-                                                                   ApiClassHelper.GetUrlFromConfigurationFile("UrlApi:CamposDealerBaseUrl"))
-            );           
-            
-        }       
+            var apiResponse = await ApiClassHelper.GetObjects(model, api);      
+        }
 
         //TODO 1 [Obrigatorio]: Criação de método para realização de carga de dados via API.        
         //TODO 2 [Melhoria]: Criar um método genérico para tratar os retornos de texto dos outros 3 controlers. (Remover código triplicado)    

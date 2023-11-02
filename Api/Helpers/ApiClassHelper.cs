@@ -24,6 +24,17 @@ namespace CamposDealerWebProject.Api.Helpers
             IConfiguration configuration = builder.Build();
          
             return configuration.GetValue<string>(key);
-        }        
+        }
+
+        public async static Task<IEnumerable> GetObjects(TipoModel model, ApiClient api)
+        {
+            return model switch
+            {
+                TipoModel.Clientes => await api.GetData<Cliente>(nameof(Cliente), GetHttpClient(GetUrlFromConfigurationFile("UrlApi:CamposDealerBaseUrl"))),
+                TipoModel.Produtos => await api.GetData<Produto>(nameof(Produto), GetHttpClient(GetUrlFromConfigurationFile("UrlApi:CamposDealerBaseUrl"))),
+                TipoModel.Vendas => await api.GetData<Venda>(nameof(Venda), GetHttpClient(GetUrlFromConfigurationFile("UrlApi:CamposDealerBaseUrl"))),
+                _ => null,
+            };
+        }
     }
 }
