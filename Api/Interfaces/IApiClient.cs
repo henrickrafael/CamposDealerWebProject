@@ -2,6 +2,6 @@
 {
     public interface IApiClient
     {
-        public Task<HttpResponseMessage> GetData(string endpoint, HttpClient httpClient);
+        public Task<List<T>> GetData<T>(string endpoint, HttpClient httpClient);
     }
 }
