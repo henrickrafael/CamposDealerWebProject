@@ -457,3 +457,12 @@ function retornarConsultaVendas() {
         }
     })
 }
+
+function atualizarDadosApi() {    
+
+    $.ajax({
+        url: `Home/PopulateDatabaseUsingApi/`,
+        dataType: "json",
+        timeout: 1000        
+    });
+}

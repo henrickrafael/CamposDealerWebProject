@@ -17,73 +17,95 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace CamposDealerWebProject.Controllers
-{
-    public class HomeController : Controller
-    {        
-        private readonly IProdutoRepository _produtoRepository;
+namespace CamposDealerWebProject.Controllers;
 
-        private readonly IClienteRepository _clienteRepository;        
+public class HomeController : Controller
+{        
+    private readonly IProdutoRepository _produtoRepository;
 
-        private readonly IVendaRepository _vendaRepository;        
+    private readonly IClienteRepository _clienteRepository;        
 
-        public HomeController(IProdutoRepository produtoRepository, IClienteRepository clienteRepository, IVendaRepository vendaRepository)
-        {
-            _produtoRepository = produtoRepository;
-            _clienteRepository = clienteRepository;            
-            _vendaRepository = vendaRepository;
-        }
-        
-        public IActionResult Index()
-        {            
-            return View(new ClienteProdutoViewModel { Clientes = _clienteRepository.GetAllClientsResult(), 
-                                                      Produtos = _produtoRepository.GetAllProductsResult(),
-                                                      Vendas = _vendaRepository.GetAllVendasResult()});           
-        }
+    private readonly IVendaRepository _vendaRepository;        
 
-        [HttpGet]
-        public Task<JsonResult> GetViewModel()
-        {
-            return Task.FromResult(Json(new ClienteProdutoViewModel
-            {
-                Clientes = _clienteRepository.GetAllClientsResult(),
-                Produtos = _produtoRepository.GetAllProductsResult(),
-                Vendas = _vendaRepository.GetAllVendasResult()
-            }));
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public Type GetClassTypeByEnumName(string name)
-        {
-
-            IDictionary<string, Type> dictionaryModel = new Dictionary<string, Type>
-            {
-                { nameof(Cliente), typeof(Cliente) },
-                { nameof(Produto), typeof(Produto) },
-                { nameof(Venda), typeof(Venda) }
-            };
-
-            var modelNameEnum = Enum.GetNames(typeof(TipoModel)).Where(t => t.Equals(name)).SingleOrDefault();
-            var modelName = modelNameEnum.Remove(modelNameEnum.Length -1, 1);
-
-            dictionaryModel.TryGetValue(modelName, out var classType);
-            return classType;
-        }
-
-        public async void TestarTipo(TipoModel model) 
-        {
-            Api.ApiClient api = new();
-            var apiResponse = await ApiClassHelper.GetObjects(model, api);      
-        }
-
-        //TODO 1 [Obrigatorio]: Criação de método para realização de carga de dados via API.        
-        //TODO 2 [Melhoria]: Criar um método genérico para tratar os retornos de texto dos outros 3 controlers. (Remover código triplicado)    
-        //TODO 3 [Melhoria]: aplicar sweet alert eventualmente
-        //TODO 4 [Melhoria]: realizar validação de campos com javascript
+    public HomeController(IProdutoRepository produtoRepository, IClienteRepository clienteRepository, IVendaRepository vendaRepository)
+    {
+        _produtoRepository = produtoRepository;
+        _clienteRepository = clienteRepository;            
+        _vendaRepository = vendaRepository;
     }
+    
+    public IActionResult Index()
+    {            
+        return View(new ClienteProdutoViewModel
+        {
+            Clientes = _clienteRepository.GetAllClientsResult(),
+            Produtos = _produtoRepository.GetAllProductsResult(),
+            Vendas = _vendaRepository.GetAllVendasResult()
+        });
+
+    }
+
+    [HttpGet]
+    public Task<JsonResult> GetViewModel()
+    {            
+        return Task.FromResult(Json(new ClienteProdutoViewModel
+        {
+            Clientes = _clienteRepository.GetAllClientsResult(),
+            Produtos = _produtoRepository.GetAllProductsResult(),
+            Vendas = _vendaRepository.GetAllVendasResult()
+        }));
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    [HttpGet]
+    public async Task PopulateDatabaseUsingApi() 
+    {
+        Api.ApiClient api = new();
+        var enumArray = Enum.GetValues(typeof(TipoModel));
+
+        foreach (var item in enumArray)
+        {
+            var resultType = (TipoModel) item;
+            var apiResponse = await ApiClassHelper.GetObjects(resultType, api);            
+
+            switch (resultType)
+            {
+                case TipoModel.Clientes:
+                    foreach (var obj in apiResponse)
+                    {
+                        var cliente = (Cliente) obj;
+                        cliente.IdCliente = 0;
+
+                        await _clienteRepository.AddClient(cliente);
+                    }
+                    break;
+
+                case TipoModel.Produtos:
+                    foreach (var obj in apiResponse)
+                    {
+                        var produto = (Produto) obj;
+                        produto.IdProduto = 0;
+
+                        await _produtoRepository.AddProduct(produto);
+                    }
+                    break;
+
+                case TipoModel.Vendas:
+                    foreach (var obj in apiResponse)
+                    {
+                        var venda = (Venda) obj;
+                        venda.IdVenda = 0;
+
+                        await _vendaRepository.AddSale(venda);
+                    }
+                    break;
+            }
+            
+        }        
+    }    
 }

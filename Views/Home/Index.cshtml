@@ -16,7 +16,7 @@
         <div class="tab-pane fade show active" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">
             <div class="container mt-3 p-2">
                 <button type="button" class="btn btn-success mt-2 d-inline" data-bs-toggle="modal" data-bs-target="#clientModalOperation" id="inserirCliente">Inserir cliente</button>               
-                <partial name="_CargaApiPartial" model="@nameof(Model.Clientes)" />
+                <partial name="_CargaApiPartial" />
                 <partial name="_PesquisaPartial" model="@nameof(Model.Clientes)" />
             </div>
             <div id="nav-client-view">
@@ -26,7 +26,7 @@
         <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
             <div class="container mt-3 p-2">
                 <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#productModalOperation" id="inserirProduto">Inserir produto</button>
-                <partial name="_CargaApiPartial" model="@nameof(Model.Produtos)" />
+                <partial name="_CargaApiPartial"/>
                 <partial name="_PesquisaPartial" model="@nameof(Model.Produtos)" />
             </div>
             <div id="nav-product-view">
@@ -36,7 +36,7 @@
         <div class="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-sales-tab">
             <div class="container mt-3 p-2">
                 <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#saleModalOperation" id="inserirVenda">Inserir venda</button>
-                <partial name="_CargaApiPartial" model="@nameof(Model.Vendas)" />
+                <partial name="_CargaApiPartial" />
                 <partial name="_PesquisaPartial" model="@nameof(Model.Vendas)" />
             </div>
             <div id="nav-sales-view">

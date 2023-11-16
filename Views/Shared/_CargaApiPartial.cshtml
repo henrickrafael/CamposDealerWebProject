@@ -1,13 +1,4 @@
-﻿@model string
-
-@{
-
-    var modelName = Enum.GetNames(typeof(TipoModel))
-                        .Where(t => t.Equals(Model))
-                        .SingleOrDefault();    
-}
-
-<button class="btn btn-outline-primary mt-2 d-inline float-end">
-    Inserir dados Api [@modelName]
+﻿<button class="btn btn-outline-primary mt-2 d-inline float-end" onclick="atualizarDadosApi()">
+    Inserir dados Api
 </button>
 

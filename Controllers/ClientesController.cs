@@ -31,7 +31,7 @@ namespace CamposDealerWebProject.Controllers
                 var clienteDecoded = System.Text.Encoding.UTF8.GetString(clienteEncoded);                
                 var clienteResult = JsonConvert.DeserializeObject<List<Cliente>>(clienteDecoded);
 
-                if (clienteResult == null)
+                if (clienteResult is null || clienteResult.Count == 0)
                 {
                     return PartialView("_ConsultaNaoLocalizada");
                 }
