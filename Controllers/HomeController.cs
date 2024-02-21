@@ -21,26 +21,22 @@ namespace CamposDealerWebProject.Controllers;
 
 public class HomeController : Controller
 {        
-    private readonly IProdutoRepository _produtoRepository;
+    private readonly UnityOfWork _unityOfWork;
+    private readonly List<Venda> _vendas;
 
-    private readonly IClienteRepository _clienteRepository;        
-
-    private readonly IVendaRepository _vendaRepository;        
-
-    public HomeController(IProdutoRepository produtoRepository, IClienteRepository clienteRepository, IVendaRepository vendaRepository)
+    public HomeController(IVendaRepository vendaRepository)
     {
-        _produtoRepository = produtoRepository;
-        _clienteRepository = clienteRepository;            
-        _vendaRepository = vendaRepository;
+        _unityOfWork = new UnityOfWork();        
+        _vendas = vendaRepository.GetAllVendasResult();
     }
     
     public IActionResult Index()
     {            
         return View(new ClienteProdutoViewModel
         {
-            Clientes = _clienteRepository.GetAllClientsResult(),
-            Produtos = _produtoRepository.GetAllProductsResult(),
-            Vendas = _vendaRepository.GetAllVendasResult()
+            Clientes = _unityOfWork.ClientRepository.GetAll(),
+            Produtos = _unityOfWork.ProdutoRepository.GetAll(),
+            Vendas = _vendas
         });
 
     }
@@ -50,9 +46,9 @@ public class HomeController : Controller
     {            
         return Task.FromResult(Json(new ClienteProdutoViewModel
         {
-            Clientes = _clienteRepository.GetAllClientsResult(),
-            Produtos = _produtoRepository.GetAllProductsResult(),
-            Vendas = _vendaRepository.GetAllVendasResult()
+            Clientes = _unityOfWork.ClientRepository.GetAll(),
+            Produtos = _unityOfWork.ProdutoRepository.GetAll(),
+            Vendas = _vendas
         }));
     }
 
@@ -60,52 +56,5 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
-
-    [HttpGet]
-    public async Task PopulateDatabaseUsingApi() 
-    {
-        Api.ApiClient api = new();
-        var enumArray = Enum.GetValues(typeof(TipoModel));
-
-        foreach (var item in enumArray)
-        {
-            var resultType = (TipoModel) item;
-            var apiResponse = await ApiClassHelper.GetObjects(resultType, api);            
-
-            switch (resultType)
-            {
-                case TipoModel.Clientes:
-                    foreach (var obj in apiResponse)
-                    {
-                        var cliente = (Cliente) obj;
-                        cliente.IdCliente = 0;
-
-                        await _clienteRepository.AddClient(cliente);
-                    }
-                    break;
-
-                case TipoModel.Produtos:
-                    foreach (var obj in apiResponse)
-                    {
-                        var produto = (Produto) obj;
-                        produto.IdProduto = 0;
-
-                        await _produtoRepository.AddProduct(produto);
-                    }
-                    break;
-
-                case TipoModel.Vendas:
-                    foreach (var obj in apiResponse)
-                    {
-                        var venda = (Venda) obj;
-                        venda.IdVenda = 0;
-
-                        await _vendaRepository.AddSale(venda);
-                    }
-                    break;
-            }
-            
-        }        
     }    
 }

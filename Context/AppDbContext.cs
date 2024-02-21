@@ -1,17 +1,32 @@
 ﻿using CamposDealerWebProject.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CamposDealerWebProject.Context
+namespace CamposDealerWebProject.Context;
+
+public class AppDbContext : DbContext
 {
-    public class AppDbContext : DbContext
+    public AppDbContext()
+    {        
+    }
+
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
+
+    public virtual DbSet<Cliente> Clientes { get; set; }
+
+    public virtual DbSet<Produto> Produtos { get; set; }
+
+    public virtual DbSet<Venda> Vendas { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
-
-        public DbSet<Cliente> Clientes { get; set; }
-
-        public DbSet<Produto> Produtos { get; set; }
-
-        public DbSet<Venda> Vendas { get; set; }
-
+        if (!optionsBuilder.IsConfigured)
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json")
+               .Build();
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            optionsBuilder.UseSqlServer(connectionString);
+        }
     }
 }
