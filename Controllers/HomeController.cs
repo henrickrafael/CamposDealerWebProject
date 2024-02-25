@@ -27,17 +27,6 @@ public class HomeController : Controller
 
     }
 
-    [HttpGet]
-    public Task<JsonResult> GetViewModel()
-    {            
-        return Task.FromResult(Json(new ClienteProdutoViewModel
-        {
-            Clientes = _unityOfWork.ClientRepository.GetAll().ToList(),
-            Produtos = _unityOfWork.ProdutoRepository.GetAll().ToList(),
-            Vendas = _unityOfWork.VendaRepository.GetAll().ToList()
-        }));
-    }
-
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
