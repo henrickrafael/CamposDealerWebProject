@@ -35,17 +35,17 @@ public class Repository<T> : IRepository<T> where T : class
 
     public async Task<T> Get(Expression<Func<T, bool>> predicate)
     {
-        return await _dbSet.AsNoTracking().FirstOrDefaultAsync(predicate);
+        return await _dbSet.FirstOrDefaultAsync(predicate);
     }
 
     public IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate = null)
     {
         if (predicate is not null)
         {
-            return _dbSet.AsNoTracking().Where(predicate);
+            return _dbSet.Where(predicate);
         }
 
-        return _dbSet.AsNoTracking().AsEnumerable();
+        return _dbSet.AsEnumerable();
     }
 
     public Task Update(T entity)

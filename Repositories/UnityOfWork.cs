@@ -7,8 +7,10 @@ namespace CamposDealerWebProject.Repositories;
 public class UnityOfWork : IUnityOfWork, IDisposable
 {
     private readonly AppDbContext _context = null;    
+
     private Repository<Cliente> _clienteRepository = null;
     private Repository<Produto> _produtoRepository = null;
+    private Repository<Venda> _vendaRepository = null;
 
     private bool disposed = false;
 
@@ -37,6 +39,15 @@ public class UnityOfWork : IUnityOfWork, IDisposable
         {
             _produtoRepository ??= new Repository<Produto>(_context);
             return _produtoRepository;
+        }
+    }
+
+    public IRepository<Venda> VendaRepository
+    {
+        get
+        { 
+            _vendaRepository ??= new Repository<Venda>(_context);
+            return _vendaRepository;
         }
     }
 

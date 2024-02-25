@@ -1,42 +1,28 @@
-﻿using Azure.Core.Pipeline;
-using CamposDealerWebProject.Api.Helpers;
-using CamposDealerWebProject.Enums;
-using CamposDealerWebProject.Models;
+﻿using CamposDealerWebProject.Models;
 using CamposDealerWebProject.Repositories;
 using CamposDealerWebProject.Repositories.Interfaces;
 using CamposDealerWebProject.ViewModel;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NuGet.Protocol;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Nodes;
 
 namespace CamposDealerWebProject.Controllers;
 
 public class HomeController : Controller
 {        
-    private readonly UnityOfWork _unityOfWork;
-    private readonly List<Venda> _vendas;
+    private readonly UnityOfWork _unityOfWork;    
 
-    public HomeController(IVendaRepository vendaRepository)
+    public HomeController()
     {
-        _unityOfWork = new UnityOfWork();        
-        _vendas = vendaRepository.GetAllVendasResult();
+        _unityOfWork = new UnityOfWork();                
     }
     
     public IActionResult Index()
     {            
         return View(new ClienteProdutoViewModel
         {
-            Clientes = _unityOfWork.ClientRepository.GetAll(),
-            Produtos = _unityOfWork.ProdutoRepository.GetAll(),
-            Vendas = _vendas
+            Clientes = _unityOfWork.ClientRepository.GetAll().ToList(),
+            Produtos = _unityOfWork.ProdutoRepository.GetAll().ToList(),
+            Vendas = _unityOfWork.VendaRepository.GetAll().ToList()
         });
 
     }
@@ -46,9 +32,9 @@ public class HomeController : Controller
     {            
         return Task.FromResult(Json(new ClienteProdutoViewModel
         {
-            Clientes = _unityOfWork.ClientRepository.GetAll(),
-            Produtos = _unityOfWork.ProdutoRepository.GetAll(),
-            Vendas = _vendas
+            Clientes = _unityOfWork.ClientRepository.GetAll().ToList(),
+            Produtos = _unityOfWork.ProdutoRepository.GetAll().ToList(),
+            Vendas = _unityOfWork.VendaRepository.GetAll().ToList()
         }));
     }
 
