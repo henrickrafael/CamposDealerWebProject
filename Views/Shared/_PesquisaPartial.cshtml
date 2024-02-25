@@ -1,11 +1,10 @@
 ﻿@model string
 
 @{
-    bool isTipoVenda = !Model.Equals(Enum.GetName<TipoModel>(TipoModel.Clientes)) 
-                    && !Model.Equals(Enum.GetName<TipoModel>(TipoModel.Produtos));
+    bool isTipoVenda = !Model.Equals(nameof(TipoModel.Clientes)) && !Model.Equals(nameof(TipoModel.Produtos));
 
     string nomeMetodoJs = string.Concat("retornarConsulta", Model, "()");
-    string placeHolder = Model.Equals(Enum.GetName<TipoModel>(TipoModel.Clientes)) ? "Nome do cliente" : "Descrição do produto";
+    string placeHolder = Model.Equals(nameof(TipoModel.Clientes)) ? "Nome do cliente" : "Descrição do produto";
     
     placeHolder = isTipoVenda ? "Consultar venda por:" : placeHolder;
 }
@@ -25,7 +24,7 @@
                     <option value="@TipoModel.Produtos" class="form-select">Descrição do produto</option>
                 </select>
             }
-            <button onclick="@nomeMetodoJs" class="btn btn-outline-primary" type="button">
+            <button onclick="@nomeMetodoJs" class="btn btn-outline-secondary" type="button">
                 <img class="icon-prop" src="~/images/search_strong_icon.png" />
             </button>
             <button onclick="resetAll()" class="btn btn-outline-danger" type="button">

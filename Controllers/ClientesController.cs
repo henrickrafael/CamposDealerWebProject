@@ -14,35 +14,33 @@ namespace CamposDealerWebProject.Controllers
 {
     public class ClientesController : Controller
     {
-        private readonly IClienteRepository _clienteRepository;
+        //TODO: Refatorar métodos
+        private readonly IClienteRepository _clienteRepository;     
 
-        public ClientesController(IClienteRepository cliente)
+        public IActionResult Index()
         {
-            _clienteRepository = cliente;
-        }
+            //try
+            //{
+            //    ModelState.Clear();
 
-        public async Task<IActionResult> Index(string cliente)
-        {
-            try
-            {
-                ModelState.Clear();
-              
-                var clienteEncoded = Convert.FromBase64String(cliente);
-                var clienteDecoded = System.Text.Encoding.UTF8.GetString(clienteEncoded);                
-                var clienteResult = JsonConvert.DeserializeObject<List<Cliente>>(clienteDecoded);
+            //    var clienteEncoded = Convert.FromBase64String(cliente);
+            //    var clienteDecoded = System.Text.Encoding.UTF8.GetString(clienteEncoded);                
+            //    var clienteResult = JsonConvert.DeserializeObject<List<Cliente>>(clienteDecoded);
 
-                if (clienteResult is null || clienteResult.Count == 0)
-                {
-                    return PartialView("_ConsultaNaoLocalizada");
-                }
+            //    if (clienteResult is null || clienteResult.Count == 0)
+            //    {
+            //        return PartialView("_ConsultaNaoLocalizada");
+            //    }
 
-                return PartialView("../Clientes/_ClientesPartial", clienteResult);
-            }
+            //    return PartialView("../Clientes/_ClientesPartial", clienteResult);
+            //}
 
-            catch (Exception)
-            {
-                return PartialView("../Clientes/_ClientesPartial", await _clienteRepository.GetAllClients());
-            }
+            //catch (Exception)
+            //{
+            //    return PartialView("../Clientes/_ClientesPartial", await _clienteRepository.GetAllClients());
+            //}
+
+            return View();
                         
         }
 
@@ -57,51 +55,51 @@ namespace CamposDealerWebProject.Controllers
             return Json(ModelState);
         }
 
-        [HttpPost]
-        public async Task<JsonResult> UpdateClientById(Cliente cliente)
-        {
+        //[HttpPost]
+        //public async Task<JsonResult> UpdateClientById(Cliente cliente)
+        //{
 
-            if (ModelState.IsValid)
-            {
-                await _clienteRepository.UpdateClientById(cliente);
-            }
+        //    if (ModelState.IsValid)
+        //    {
+        //        await _clienteRepository.UpdateClientById(cliente);
+        //    }
 
-            return Json(ModelState);
-        }
+        //    return Json(ModelState);
+        //}
 
-        [HttpGet]
-        public async Task<JsonResult> GetClientById(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                var cliente = await _clienteRepository.GetClientById(id);
-                return Json(cliente);
-            }
+        //[HttpGet]
+        //public async Task<JsonResult> GetClientById(int id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var cliente = await _clienteRepository.GetClientById(id);
+        //        return Json(cliente);
+        //    }
 
-            return Json(ModelState);
-        }
+        //    return Json(ModelState);
+        //}
 
-        [HttpGet]
-        public async Task<JsonResult> GetClientByName(string nmCliente)
-        {
-            if (ModelState.IsValid && !string.IsNullOrWhiteSpace(nmCliente))
-            {
-                var cliente = await _clienteRepository.GetClientByName(nmCliente);
-                return Json(cliente);
-            }
+        //[HttpGet]
+        //public async Task<JsonResult> GetClientByName(string nmCliente)
+        //{
+        //    if (ModelState.IsValid && !string.IsNullOrWhiteSpace(nmCliente))
+        //    {
+        //        var cliente = await _clienteRepository.GetClientByName(nmCliente);
+        //        return Json(cliente);
+        //    }
 
-            return Json(ModelState);
-        }
+        //    return Json(ModelState);
+        //}
 
-        [HttpDelete]
-        public async Task<JsonResult> DeleteClientById(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                await _clienteRepository.DeleteClientById(id);
-            }
+        //[HttpDelete]
+        //public async Task<JsonResult> DeleteClientById(int id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        await _clienteRepository.DeleteClientById(id);
+        //    }
 
-            return Json(ModelState);
-        }
+        //    return Json(ModelState);
+        //}
     }
 }
