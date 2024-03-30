@@ -16,10 +16,10 @@ public class UnityOfWork : IUnityOfWork, IDisposable
 
     public UnityOfWork()
     {
-        _context = new AppDbContext();
+        _context = new ();
     }
 
-    public async Task Commit()
+    public async Task CommitAsync()
     {
         await _context.SaveChangesAsync();
     }

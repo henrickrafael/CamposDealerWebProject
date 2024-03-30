@@ -5,23 +5,21 @@
                 <h5 class="modal-title" id="clientModalOperationLabel">Inserir cliente</h5>
                 <button type="button" class="btn-close fechar" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form>
-                    <input type="text" hidden class="form-control" id="client-id">
-                    <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">Nome</label>
-                        <input type="text" class="form-control" id="client-name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Cidade</label>
-                        <input type="text" class="form-control" id="city-name">
-                    </div>
-                    <input type="reset" hidden class="btn btn-primary reset-fields">
-                </form>
+            <div class="modal-body">                    
+                <input type="text" hidden class="form-control" id="client-id">
+                <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Nome</label>
+                    <input type="text" class="form-control" id="client-name">
+                </div>
+                <div class="mb-3">
+                    <label for="message-text" class="col-form-label">Cidade</label>
+                    <input type="text" class="form-control" id="city-name">
+                </div>
+                <input type="reset" hidden class="btn btn-primary reset-fields">                    
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary fechar" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" id="inserirClientModal" class="btn btn-primary">Salvar</button>                
+                <button type="button" class="btn btn-secondary fechar" data-bs-dismiss="modal">Fechar</button>                    
+                <button id="inserirClientModal" type="submit" class="btn btn-primary">Salvar</button>
             </div>
         </div>
     </div>

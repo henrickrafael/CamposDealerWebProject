@@ -7,5 +7,5 @@ public interface IUnityOfWork
     IRepository<Cliente> ClientRepository { get; }
     IRepository<Produto> ProdutoRepository { get; }
     IRepository<Venda> VendaRepository { get; }
-    Task Commit();
+    Task CommitAsync();
 }

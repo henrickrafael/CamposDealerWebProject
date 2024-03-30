@@ -8,7 +8,7 @@ public interface IRepository<T> where T : class
 
     Task<T> Get(Expression<Func<T, bool>> predicate);
 
-    Task Add(T entity);
+    Task AddAsync(T entity);
 
     Task Update(T entity);
 

@@ -1,6 +1,5 @@
 ﻿using CamposDealerWebProject.Models;
 using CamposDealerWebProject.Repositories;
-using CamposDealerWebProject.Repositories.Interfaces;
 using CamposDealerWebProject.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
